@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f0a04b53-6120-4329-9385-69f7540b7a14" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mesa_De_Ayuda_U.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/MesaDeAyudaUApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/controller/AsignacionController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/controller/CategoriaController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/controller/NotificacionController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/controller/TicketController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/controller/UsuarioController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/model/Adjunto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/model/Asignacion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/model/Categoria.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/model/Comentario.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/model/Correo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/model/DocumentoSoporte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/model/EntidadBase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/model/EstadoTicket.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/model/ExportableCSV.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/model/Identificable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/model/Notificacion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/model/Prioridad.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/model/RangoFechas.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/model/SLAConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/model/Telefono.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/model/Ticket.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/model/TipoTicket.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/model/Usuario.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/repository/AsignacionCsvRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/repository/CategoriaCsvRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/repository/CsvRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/repository/TicketCsvRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/repository/UsuarioCsvRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/service/AdjuntoService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/service/AsignacionService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/service/CategoriaService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/service/ComentarioService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/service/NotificacionService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/service/SlaCritico.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/service/SlaEstandar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/service/SlaPolicy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/service/TicketService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/umanizales/mesadeayuda_u/service/UsuarioService.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="34zbrrot5jRdxT2UtaH7AmHDU1H" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Rebasing master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/INDUMA/Documents/Proyecto_Final_Programacion1/Mesa_De_Ayuda_U_2 prueba"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26830.84" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f0a04b53-6120-4329-9385-69f7540b7a14" name="Changes" comment="" />
+      <created>1762219548690</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1762219548690</updated>
+    </task>
+    <servers />
+  </component>
+</project>
