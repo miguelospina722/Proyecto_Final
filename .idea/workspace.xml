@@ -10,9 +10,6 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -27,9 +24,9 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHELLCHECK.PATH": "C:\\Users\\INDUMA\\AppData\\Roaming\\JetBrains\\IntelliJIdea2025.2\\plugins\\Shell Script\\shellcheck.exe",
-    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/INDUMA/Documents/Proyecto_Final_Programacion1/HelpDesk_U",
+    "last_opened_file_path": "C:/Users/INDUMA/Documents/Proyecto_Final_Programacion1/Proyecto_Final/HelpDesk_U",
     "onboarding.tips.debug.path": "C:/Users/INDUMA/Documents/Proyecto_Final_Programacion1/HelpDesk_U/src/Main.java",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
@@ -89,7 +86,7 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/ticket.java</url>
           <line>26</line>
-          <properties class="co.edu.umanizales.helpdesku.model.ticket">
+          <properties class="co.edu.umanizales.helpdesku.model.ticket" method="toCsv">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
