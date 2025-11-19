@@ -1,0 +1,335 @@
+{
+	"info": {
+		"_postman_id": "56507c02-d597-4d4e-9ea0-695fd138d548",
+		"name": "RESTful API Basics #blueprint",
+		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these request types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT and PATCH requests.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a variable called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Tests\" tab**\n\nTests help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/b5f280a7-4b09-48ec-857f-0a7ed99d7ef8/U2NyZWVuc2hvdCAyMDIzLTAzLTI3IGF0IDkuNDcuMjggUE0ucG5n\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n- Add more scripts in \"Tests\" to verify if the API works as expected and execute flows.\n    \n\n## ℹ️ Resources\n\n[Building requests](https://learning.postman.com/docs/sending-requests/requests/)  \n[Authorizing requests](https://learning.postman.com/docs/sending-requests/authorization/)  \n[Using variables](https://learning.postman.com/docs/sending-requests/variables/)  \n[Managing environments](https://learning.postman.com/docs/sending-requests/managing-environments/)  \n[Writing scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49716445",
+		"_collection_link": "https://miguelospina722-995566.postman.co/workspace/Miguel-Angel-Ospina-Rios's-Work~282e9bb1-e302-42c3-8dec-5a64e3fc26ca/collection/49716445-56507c02-d597-4d4e-9ea0-695fd138d548?action=share&source=collection_link&creator=49716445"
+	},
+	"item": [
+		{
+			"name": "Prueba",
+			"item": [
+				{
+					"name": "api/health",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"id\": \"c4f107f1-0a4e-48d9-9d08-b5016b765555\",\r\n    \"createdAt\": \"2025-11-13T17:07:00.000000\",\r\n    \"updatedAt\": \"2025-11-13T17:07:00.000000\",\r\n    \"ticketId\": \"33ab77d7-590d-416d-9a22-dfa4cb6450d4\",\r\n    \"authorId\": \"af4bfb37-bff7-4564-99aa-a0ec0c376d64\",\r\n    \"content\": \"Se solicitó al usuario reiniciar el equipo\",\r\n    \"commentedAt\": \"2025-11-13T11:15:00\"\r\n  }"
+						},
+						"url": {
+							"raw": "http://localhost:9095/api/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9095",
+							"path": [
+								"api",
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "api/users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9095/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9095",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "priorities",
+			"item": [
+				{
+					"name": "api/priorities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9095/api/priorities",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9095",
+							"path": [
+								"api",
+								"priorities"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categories",
+			"item": [
+				{
+					"name": "api/categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9095/api/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9095",
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "status",
+			"item": [
+				{
+					"name": "api/status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9095/api/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9095",
+							"path": [
+								"api",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tickets",
+			"item": [
+				{
+					"name": "api/tickets",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"6d4c9b68-5a2f-43a2-9d5a-71f06a1cce55\",\r\n    \"createdAt\": \"2025-11-13T17:05:45.000000\",\r\n    \"updatedAt\": \"2025-11-13T17:05:45.000000\",\r\n    \"title\": \"No enciende el equipó\",\r\n    \"description\": \"El equipo dejó de funionar luego de apagarlo\",\r\n    \"stateId\": \"ec4de150-e3dc-4596-8d2f-2503d5c239a6\",\r\n    \"categoryId\": \"6e88d4d7-af61-4fec-915e-07191a2cf184\",\r\n    \"priorityId\": \"134b5826-cde3-4049-b244-34296175735f\",\r\n    \"requesterId\": \"af4bfb37-bff7-4564-99aa-a0ec0c376d64\",\r\n    \"assigneeId\": \"599138f9-9649-4da2-8ec0-0a2e01361b48\",\r\n    \"dueDate\": \"2025-11-20T18:00:00\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/api/tickets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "assignm",
+			"item": [
+				{
+					"name": "api/assignments",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n    \"id\": \"b930b3af-08d0-41d8-95bc-8ecc1f05c444\",\r\n    \"createdAt\": \"2025-11-13T17:06:30.000000\",\r\n    \"updatedAt\": \"2025-11-13T17:06:30.000000\",\r\n    \"ticketId\": \"d0769454-8d02-4d10-a2ee-b014c6192176\",\r\n    \"technicianId\": \"8b9f9a24-9c6c-4a53-9e2e-7120f0d7a333\",\r\n    \"assignedAt\": \"2025-11-13T10:30:00\",\r\n    \"notes\": \"Asignado por disponibasdasdasdilidad del turno matutino\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9095/api/assignments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9095",
+							"path": [
+								"api",
+								"assignments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comments",
+			"item": [
+				{
+					"name": "api/comments",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"id\": \"c4f107f1-0a4e-48d9-9d08-b5016b765555\",\r\n    \"createdAt\": \"2025-11-13T17:07:00.000000\",\r\n    \"updatedAt\": \"2025-11-13T17:07:00.000000\",\r\n    \"ticketId\": \"33ab77d7-590d-416d-9a22-dfa4cb6450d4\",\r\n    \"authorId\": \"af4bfb37-bff7-4564-99aa-a0ec0c376d64\",\r\n    \"content\": \"Se solicitó al usuario reiniciar el equipo\",\r\n    \"commentedAt\": \"2025-11-13T11:15:00\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9095/api/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9095",
+							"path": [
+								"api",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "attachments",
+			"item": [
+				{
+					"name": "/api/attachments",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"id\": \"d9b6a4fb-3b68-4aa6-a712-5cb898d16666\",\r\n    \"createdAt\": \"2025-11-13T17:07:30.000000\",\r\n    \"updatedAt\": \"2025-11-13T17:07:30.000000\",\r\n    \"ticketId\": \"d0769454-8d02-4d10-a2ee-b014c6192176\",\r\n    \"fileName\": \"captura-error.png\",\r\n    \"filePath\": \"/evidencias/captura-error.png\",\r\n    \"sizeBytes\": 204800\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9095/api/attachments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9095",
+							"path": [
+								"api",
+								"attachments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "sla",
+			"item": [
+				{
+					"name": "api/slas",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://postman-rest-api-learner.glitch.me/"
+		}
+	]
+}

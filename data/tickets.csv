@@ -1,0 +1,3 @@
+id,created_at,updated_at,title,description,status_id,category_id,priority_id,requester_id,assignee_id,due_date
+d0769454-8d02-4d10-a2ee-b014c6192176,2025-11-19T07:18:48.198132600,2025-11-19T07:18:48.198132600,Problemas de red,No tengo Internet,5f4496ad-1874-4b29-85dd-b768803511bb,a17d2df3-6ab4-417f-af29-1258accbed91,66ea9bd3-e0c8-40eb-ab14-bb078cbcd795,af4bfb37-bff7-4564-99aa-a0ec0c376d64,af4bfb37-bff7-4564-99aa-a0ec0c376d64,2025-11-20T18:00
+8d437e2d-fd4f-4a7d-879d-7209998398f7,2025-11-19T10:52:28.852084600,2025-11-19T10:52:28.852084600,No enciende el equipó,El equipo dejó de funionar luego de apagarlo,,6e88d4d7-af61-4fec-915e-07191a2cf184,134b5826-cde3-4049-b244-34296175735f,af4bfb37-bff7-4564-99aa-a0ec0c376d64,599138f9-9649-4da2-8ec0-0a2e01361b48,2025-11-20T18:00

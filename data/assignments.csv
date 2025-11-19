@@ -1,0 +1,2 @@
+id,created_at,updated_at,ticket_id,technician_id,assigned_at,notes
+b3c5ffad-f255-496b-818e-964c505f01f4,2025-11-19T10:59:29.474115300,2025-11-19T10:59:29.474115300,d0769454-8d02-4d10-a2ee-b014c6192176,57a3f25a-cec2-4997-9c1c-84d2cb587883,2025-11-13T10:30,Asignado por disponibilidad del turno matutino

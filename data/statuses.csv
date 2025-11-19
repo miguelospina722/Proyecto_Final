@@ -1,0 +1,4 @@
+id,created_at,updated_at,code,name,description
+ec4de150-e3dc-4596-8d2f-2503d5c239a6,2025-11-17T20:27:04.363539100,2025-11-18T08:27:48.596792600,OPEN,Abierto,El ticket está abierto
+0cc9c701-e6f2-4186-bc8e-150713c90f8e,2025-11-17T20:27:33.954780100,2025-11-18T08:28:52.322228800,ASSIGNED,Asignado,El ticket está asignado
+5f4496ad-1874-4b29-85dd-b768803511bb,2025-11-17T20:29:02.598445600,2025-11-18T08:30:22.068161200,CLOSED,Cerrado,El ticket está cerrado
