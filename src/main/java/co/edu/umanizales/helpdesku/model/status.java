@@ -1,5 +1,6 @@
 package co.edu.umanizales.helpdesku.model;
 
+import co.edu.umanizales.helpdesku.exception.BadRequestException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,8 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class status extends baseentity {
 
-    private String code;
-    private String name;
+    private ticketstatus code;
     private String description;
 
     @Override
@@ -20,9 +20,7 @@ public class status extends baseentity {
         StringBuilder builder = new StringBuilder();
         builder.append(buildBaseCsv());
         builder.append(",");
-        builder.append(code == null ? "" : code);
-        builder.append(",");
-        builder.append(name == null ? "" : name);
+        builder.append(code == null ? "" : code.name());
         builder.append(",");
         builder.append(description == null ? "" : description);
         return builder.toString();
@@ -33,18 +31,33 @@ public class status extends baseentity {
         String[] data = csvhelper.splitLine(csvLine);
         applyBaseValues(data);
         if (data.length > 3) {
-            code = data[3];
+            code = parseCode(data[3]);
         }
         if (data.length > 4) {
-            name = data[4];
-        }
-        if (data.length > 5) {
-            description = data[5];
+            description = data[4];
         }
     }
 
     @Override
     public String[] headers() {
-        return mergeHeaders("code", "name", "description");
+        return mergeHeaders("code", "description");
+    }
+
+    public void setCode(ticketstatus code) {
+        if (code == null) {
+            throw new BadRequestException("Asigna un estado correcto");
+        }
+        this.code = code;
+    }
+
+    public void setCode(String rawCode) {
+        this.code = ticketstatus.fromString(rawCode);
+    }
+
+    private static ticketstatus parseCode(String rawValue) {
+        if (rawValue == null || rawValue.isBlank()) {
+            return null;
+        }
+        return ticketstatus.fromString(rawValue);
     }
 }

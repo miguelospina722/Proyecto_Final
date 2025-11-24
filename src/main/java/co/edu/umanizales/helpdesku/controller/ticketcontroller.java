@@ -55,6 +55,7 @@ public class ticketcontroller {
         }
         request.setId(id);
         request.setCreatedAt(existing.getCreatedAt());
+        mergeMissingFields(request, existing);
         return ResponseEntity.ok(ticketService.saveTicket(request));
     }
 
@@ -65,5 +66,32 @@ public class ticketcontroller {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.noContent().build();
+    }
+
+    private static void mergeMissingFields(ticket target, ticket existing) {
+        if (target.getTitle() == null) {
+            target.setTitle(existing.getTitle());
+        }
+        if (target.getDescription() == null) {
+            target.setDescription(existing.getDescription());
+        }
+        if (target.getStatus() == null || target.getStatus().getId() == null) {
+            target.setStatus(existing.getStatus());
+        }
+        if (target.getCategory() == null || target.getCategory().getId() == null) {
+            target.setCategory(existing.getCategory());
+        }
+        if (target.getPriority() == null || target.getPriority().getId() == null) {
+            target.setPriority(existing.getPriority());
+        }
+        if (target.getRequester() == null || target.getRequester().getId() == null) {
+            target.setRequester(existing.getRequester());
+        }
+        if (target.getAssignee() == null || target.getAssignee().getId() == null) {
+            target.setAssignee(existing.getAssignee());
+        }
+        if (target.getDueDate() == null) {
+            target.setDueDate(existing.getDueDate());
+        }
     }
 }

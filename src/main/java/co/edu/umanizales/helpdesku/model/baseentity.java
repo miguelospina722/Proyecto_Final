@@ -1,6 +1,7 @@
 package co.edu.umanizales.helpdesku.model;
 
 import java.time.LocalDateTime;
+import java.util.function.Supplier;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -52,15 +53,28 @@ public abstract class baseentity implements csvpersistable {
         int baseLength = base.length;
         int extraLength = extras == null ? 0 : extras.length;
         String[] result = new String[baseLength + extraLength];
-        for (int index = 0; index < baseLength; index++) {
-            result[index] = base[index];
-        }
-        if (extras != null) {
-            for (int index = 0; index < extraLength; index++) {
-                result[baseLength + index] = extras[index];
-            }
+        System.arraycopy(base, 0, result, 0, baseLength);
+        if (extraLength > 0) {
+            System.arraycopy(extras, 0, result, baseLength, extraLength);
         }
         return result;
+    }
+
+    protected static String idOrEmpty(baseentity entity) {
+        return entity == null || entity.getId() == null ? "" : entity.getId();
+    }
+
+    protected static <T extends baseentity> T referenceFromId(String rawValue, Supplier<T> factory) {
+        if (rawValue == null || rawValue.isBlank()) {
+            return null;
+        }
+        T instance = factory.get();
+        instance.setId(rawValue.trim());
+        return instance;
+    }
+
+    protected static String valueAt(String[] data, int index) {
+        return data.length > index ? data[index] : null;
     }
 
     public void onRemove() {

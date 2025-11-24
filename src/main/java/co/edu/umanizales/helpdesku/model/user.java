@@ -1,5 +1,8 @@
 package co.edu.umanizales.helpdesku.model;
 
+import java.util.Arrays;
+
+import co.edu.umanizales.helpdesku.exception.BadRequestException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,22 +16,17 @@ public class user extends baseentity {
 
     private String username;
     private String fullName;
-    private String role;
+    private userrole role;
     private boolean active;
     private usercontact contact;
 
     @Override
     public String toCsv() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(buildBaseCsv());
-        builder.append(",");
-        builder.append(username == null ? "" : username);
-        builder.append(",");
-        builder.append(fullName == null ? "" : fullName);
-        builder.append(",");
-        builder.append(role == null ? "" : role);
-        builder.append(",");
-        builder.append(active);
+        StringBuilder builder = new StringBuilder(buildBaseCsv());
+        appendValue(builder, username);
+        appendValue(builder, fullName);
+        appendValue(builder, role == null ? null : role.name());
+        appendValue(builder, Boolean.toString(active));
         builder.append(",");
         if (contact != null) {
             builder.append(contact.toCompact());
@@ -46,8 +44,8 @@ public class user extends baseentity {
         if (data.length > 4) {
             fullName = data[4];
         }
-        if (data.length > 5) {
-            role = data[5];
+        if (data.length > 5 && data[5] != null && !data[5].isBlank()) {
+            role = userrole.fromString(data[5]);
         }
         if (data.length > 6) {
             active = Boolean.parseBoolean(data[6]);
@@ -60,29 +58,32 @@ public class user extends baseentity {
     @Override
     public String[] headers() {
         String[] base = baseHeaders();
-        String[] result = new String[base.length + 5];
-        for (int index = 0; index < base.length; index++) {
-            result[index] = base[index];
-        }
-        result[3] = "username";
-        result[4] = "full_name";
-        result[5] = "role";
-        result[6] = "active";
-        result[7] = "contact";
+        String[] result = Arrays.copyOf(base, base.length + 5);
+        int offset = base.length;
+        result[offset] = "username";
+        result[offset + 1] = "full_name";
+        result[offset + 2] = "role";
+        result[offset + 3] = "active";
+        result[offset + 4] = "contact";
         return result;
     }
 
     public void setUsername(String username) {
         if (username == null) {
-            throw new IllegalArgumentException("username must not be null");
+            throw new BadRequestException("El username es obligatorio");
         }
         String sanitized = username.trim();
         if (sanitized.isEmpty()) {
-            throw new IllegalArgumentException("username must not be empty");
+            throw new BadRequestException("El username es obligatorio");
         }
         if (this.username != null && !this.username.equals(sanitized)) {
-            throw new IllegalStateException("username cannot be reassigned once defined");
+            throw new BadRequestException("El username no puede modificarse");
         }
         this.username = sanitized;
+    }
+
+    private void appendValue(StringBuilder builder, String value) {
+        builder.append(",");
+        builder.append(value == null ? "" : value);
     }
 }

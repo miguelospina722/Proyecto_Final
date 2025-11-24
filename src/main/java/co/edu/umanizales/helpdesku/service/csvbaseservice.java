@@ -15,11 +15,14 @@ import java.util.List;
 import java.util.UUID;
 
 import co.edu.umanizales.helpdesku.model.baseentity;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationEventPublisherAware;
 
-public abstract class csvbaseservice<T extends baseentity> {
+public abstract class csvbaseservice<T extends baseentity> implements ApplicationEventPublisherAware {
 
     private final List<T> items;
     private final Path filePath;
+    private ApplicationEventPublisher applicationEventPublisher;
 
     protected csvbaseservice(String fileName) {
         items = new ArrayList<>();
@@ -96,6 +99,11 @@ public abstract class csvbaseservice<T extends baseentity> {
         return false;
     }
 
+    @Override
+    public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+        this.applicationEventPublisher = applicationEventPublisher;
+    }
+
     private void ensureFileExists() {
         try {
             if (!Files.exists(filePath.getParent())) {
@@ -168,6 +176,13 @@ public abstract class csvbaseservice<T extends baseentity> {
             }
         } catch (IOException exception) {
             throw new IllegalStateException("Unable to persist data to " + filePath, exception);
+        }
+        notifyCatalogChanged();
+    }
+
+    private void notifyCatalogChanged() {
+        if (applicationEventPublisher != null) {
+            applicationEventPublisher.publishEvent(new EndpointCatalogChangedEvent(this));
         }
     }
 }

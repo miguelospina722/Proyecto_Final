@@ -47,7 +47,7 @@ public class usercontroller {
         user saved = userService.saveUser(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
-
+/* Loombook */
     @PutMapping("/{id}")
     public ResponseEntity<user> update(@PathVariable String id, @RequestBody user request) {
         user existing = userService.getById(id);

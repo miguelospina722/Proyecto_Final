@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import co.edu.umanizales.helpdesku.exception.BadRequestException;
 import co.edu.umanizales.helpdesku.model.user;
 
 @Service
@@ -37,27 +38,52 @@ public class userservice extends csvbaseservice<user> {
         return findById(id);
     }
 
+    public user requireActiveUserById(String userId) {
+        if (userId == null || userId.isBlank()) {
+            throw new BadRequestException("Este usuario no está activo.");
+        }
+        user stored = getById(userId);
+        if (stored == null || !stored.isActive()) {
+            throw new BadRequestException("Este usuario no está activo.");
+        }
+        return stored;
+    }
+
     public user saveUser(user entity) {
         if (entity == null) {
-            throw new IllegalArgumentException("user entity must not be null");
+            throw new BadRequestException("El usuario es obligatorio");
         }
-        String username = entity.getUsername();
-        if (username == null) {
-            throw new IllegalStateException("username must be defined before saving");
+        if (entity.getUsername() == null) {
+            throw new BadRequestException("El username es obligatorio");
         }
-        List<user> current = findAll();
-        for (int index = 0; index < current.size(); index++) {
-            user existing = current.get(index);
-            if (username.equals(existing.getUsername())) {
-                if (entity.getId() == null || !entity.getId().equals(existing.getId())) {
-                    throw new IllegalStateException("username " + username + " already exists");
-                }
-            }
-        }
+        entity.setUsername(entity.getUsername());
+        validateRole(entity);
+        validateUniqueUsername(entity);
         return save(entity);
     }
 
     public boolean deleteUser(String id) {
         return delete(id);
+    }
+
+    private void validateRole(user entity) {
+        if (entity.getRole() == null) {
+            throw new BadRequestException("Asigna un rol correcto");
+        }
+    }
+
+    private void validateUniqueUsername(user entity) {
+        String username = entity.getUsername();
+        List<user> current = findAll();
+        for (int index = 0; index < current.size(); index++) {
+            user existing = current.get(index);
+            if (existing.getUsername() == null) {
+                continue;
+            }
+            boolean sameId = entity.getId() != null && entity.getId().equals(existing.getId());
+            if (!sameId && existing.getUsername().equalsIgnoreCase(username)) {
+                throw new BadRequestException("Este usuario ya está creado");
+            }
+        }
     }
 }

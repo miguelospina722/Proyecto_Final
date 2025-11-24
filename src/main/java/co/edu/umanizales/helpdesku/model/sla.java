@@ -7,23 +7,28 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import co.edu.umanizales.helpdesku.exception.BadRequestException;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class sla extends baseentity {
 
-    private String ticketId;
+    private static final String TICKET_ERROR_MESSAGE = "Ticket no encontrado";
+
+    private ticket ticket;
     private LocalDateTime responseDeadline;
     private LocalDateTime resolutionDeadline;
     private boolean breached;
 
     @Override
     public String toCsv() {
+        validateTicket();
         StringBuilder builder = new StringBuilder();
         builder.append(buildBaseCsv());
         builder.append(",");
-        builder.append(ticketId == null ? "" : ticketId);
+        builder.append(idOrEmpty(ticket));
         builder.append(",");
         if (responseDeadline != null) {
             builder.append(responseDeadline);
@@ -37,12 +42,18 @@ public class sla extends baseentity {
         return builder.toString();
     }
 
+    private void validateTicket() {
+        if (ticket == null || ticket.getId() == null || ticket.getId().isBlank()) {
+            throw new BadRequestException(TICKET_ERROR_MESSAGE);
+        }
+    }
+
     @Override
     public void fromCsv(String csvLine) {
         String[] data = csvhelper.splitLine(csvLine);
         applyBaseValues(data);
         if (data.length > 3) {
-            ticketId = data[3];
+            ticket = referenceFromId(data[3], ticket::new);
         }
         if (data.length > 4 && data[4] != null && !data[4].isEmpty()) {
             responseDeadline = LocalDateTime.parse(data[4]);

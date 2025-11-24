@@ -1,7 +1,6 @@
 package co.edu.umanizales.helpdesku.model;
 
 import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,13 +14,12 @@ public class ticket extends baseentity {
 
     private String title;
     private String description;
-    private String statusId;
-    private String categoryId;
-    private String priorityId;
-    private String requesterId;
-    private String assigneeId;
+    private status status;
+    private category category;
+    private priority priority;
+    private user requester;
+    private user assignee;
     private LocalDateTime dueDate;
-    private String addres;
 
     @Override
     public String toCsv() {
@@ -32,15 +30,15 @@ public class ticket extends baseentity {
         builder.append(",");
         builder.append(description == null ? "" : description);
         builder.append(",");
-        builder.append(statusId == null ? "" : statusId);
+        builder.append(idOrEmpty(status));
         builder.append(",");
-        builder.append(categoryId == null ? "" : categoryId);
+        builder.append(idOrEmpty(category));
         builder.append(",");
-        builder.append(priorityId == null ? "" : priorityId);
+        builder.append(idOrEmpty(priority));
         builder.append(",");
-        builder.append(requesterId == null ? "" : requesterId);
+        builder.append(idOrEmpty(requester));
         builder.append(",");
-        builder.append(assigneeId == null ? "" : assigneeId);
+        builder.append(idOrEmpty(assignee));
         builder.append(",");
         if (dueDate != null) {
             builder.append(dueDate);
@@ -59,21 +57,11 @@ public class ticket extends baseentity {
             description = data[4];
         }
         int legacyOffset = data.length > 11 ? 1 : 0;
-        if (data.length > 5 + legacyOffset) {
-            statusId = data[5 + legacyOffset];
-        }
-        if (data.length > 6 + legacyOffset) {
-            categoryId = data[6 + legacyOffset];
-        }
-        if (data.length > 7 + legacyOffset) {
-            priorityId = data[7 + legacyOffset];
-        }
-        if (data.length > 8 + legacyOffset) {
-            requesterId = data[8 + legacyOffset];
-        }
-        if (data.length > 9 + legacyOffset) {
-            assigneeId = data[9 + legacyOffset];
-        }
+        status = referenceFromId(valueAt(data, 5 + legacyOffset), status::new);
+        category = referenceFromId(valueAt(data, 6 + legacyOffset), category::new);
+        priority = referenceFromId(valueAt(data, 7 + legacyOffset), priority::new);
+        requester = referenceFromId(valueAt(data, 8 + legacyOffset), user::new);
+        assignee = referenceFromId(valueAt(data, 9 + legacyOffset), user::new);
         int dueDateIndex = 10 + legacyOffset;
         if (data.length > dueDateIndex && data[dueDateIndex] != null && !data[dueDateIndex].isEmpty()) {
             dueDate = LocalDateTime.parse(data[dueDateIndex]);

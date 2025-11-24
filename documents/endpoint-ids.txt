@@ -1,0 +1,43 @@
+Usuarios:
+6a63ca87-c38e-444b-bf4d-5f81caa63850 - Miguel Ospina (username: Miguel.722, rol ADMIN)
+90b8774b-2bf9-4df2-9989-a1e095cc4ba6 - Esteban Florez (username: Estban.F, rol TECHNICIAN)
+f1e51add-3837-4d3a-84b2-8c47ccadbd1a - Julian Toro (username: Julia.T, rol AGENT)
+26cee121-7d8b-45c0-b901-7059071e9e33 - Tecnico no activo (username: Tecnico.NA, rol TECHNICIAN, inactivo)
+92dc8b3e-fea6-4498-8ff6-36928168d886 - Usuarios Activo (username: Usuario1, rol USER)
+621e57bd-bb75-4d62-8979-22004f92d0e6 - Usuarios Activo (username: Usuario2, rol USER)
+3f61545c-5d25-43ff-8f69-2fabcc154bb4 - Usuarios No Activo (username: Usuario3, rol USER, inactivo)
+b84b92ac-0380-4e18-905a-7b7c9f19d8a0 - Luisa Fernanda (username: Luisa.F, rol ADMIN)
+
+Categorías:
+c9813184-d422-46d0-bfbe-3112c8dba134 - INFRASTRUCTURE (Redes - Cables - Cámaras)
+6b9cc705-891a-4c8d-b6f4-d4711ec167a3 - HARDWARE (Componentes Equipos)
+747af2dc-85ed-4a88-9439-43fb989c1622 - SOFTWARE (Sistema Equipos)
+78898bba-0ea8-467e-bac2-80e472e7e96f - APPS (Word no abre)
+c42dd49d-10d8-4046-a7c0-1da2e2ae6172 - SERVICES (Mantenimientos - Inventarios - Compras)
+
+Prioridades:
+134b5826-cde3-4049-b244-34296175735f - Alta (HIGH, respuesta 60 min, resolución 240 min)
+66ea9bd3-e0c8-40eb-ab14-bb078cbcd795 - Medio (MEDIUM, respuesta 90 min, resolución 270 min)
+5a55ae61-18de-4a8c-89b6-b32cd21c8307 - Bajo (LOW, respuesta 120 min, resolución 300 min)
+fbcc5396-a20a-4301-9eb4-cf7b301be9a1 - Crito (CRITICAL, respuesta 30 min, resolución 210 min)
+
+Estados:
+eea518fb-c5ef-4c20-a759-807cc71ea35e - OPEN (El ticket está abierto)
+290ba527-e8b0-4571-b8c2-9e794760ab5e - ASSIGNED (El ticket está asignado)
+9d1b0d7f-3ed8-4c4a-8cb3-2d4f5c6ed899 - ON_HOLD (El ticket está en espera)
+a37ad8d5-f8ae-419b-8e10-ec81f6a477b1 - RESOLVED (El ticket está resuelto)
+93e54164-ede9-4666-9104-926393e52e7c - CLOSED (El ticket está cerrado)
+
+Tickets:
+91e52a97-1f86-4ce4-b85d-0eaa83b42c71 - No enciende el equipo (solicitante Usuarios Activo)
+01c5b17b-90e1-4439-a057-2465eb3d71c1 - Problemas Red (solicitante Usuarios Activo)
+0501adb7-9397-4e03-83f1-c888659e6d64 - Problemas conexión .40 (solicitante Julian Toro)
+a2a673ca-ebfc-4327-a805-b1bf0e5138b4 - Office (solicitante Usuarios Activo)
+f5001366-7bbd-4c1d-ad3f-a73df7d4d670 - Se dañó mouse (solicitante Usuarios Activo)
+
+Asignaciones:
+92d732bb-94f0-4195-8ac0-67a89987f2d2 - Ticket "No enciende el equipo" asignado a Miguel Ospina (asignado 2024-11-19T08:30:00) (nota: Se integra a Miguel Ospina para una mejor revisión)
+989738c9-814b-40e2-a4b9-126a1fb1cadb - Ticket "Problemas Red" asignado a Julian Toro (asignado 2024-11-19T08:30:00) (nota: Se asigna a Julian para primer revisión)
+8cad710d-4cb6-40da-83cd-974369ae4a82 - Ticket "Problemas conexión .40" asignado a Esteban Florez (asignado 2024-11-19T08:30:00) (nota: Se aigna a Esteban para que siga con el caso)
+81b88e68-00ca-4a1a-8ed8-cacd020b0047 - Ticket "Office" asignado a Usuarios Activo (asignado 2024-11-19T08:30:00) (nota: Se asigna usuario para aprobación de cierre de ticket)
+

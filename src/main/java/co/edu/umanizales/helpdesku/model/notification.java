@@ -7,26 +7,33 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import co.edu.umanizales.helpdesku.exception.BadRequestException;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class notification extends baseentity {
 
-    private String ticketId;
-    private String recipientId;
+    private static final String TICKET_ERROR_MESSAGE = "Ticket no encontrado";
+    private static final String USER_ERROR_MESSAGE = "Id usuario no existente, no activo o no valido";
+
+    private ticket ticket;
+    private user recipient;
     private String message;
     private LocalDateTime sentAt;
     private boolean read;
 
     @Override
     public String toCsv() {
+        validateTicket();
+        validateRecipient();
         StringBuilder builder = new StringBuilder();
         builder.append(buildBaseCsv());
         builder.append(",");
-        builder.append(ticketId == null ? "" : ticketId);
+        builder.append(idOrEmpty(ticket));
         builder.append(",");
-        builder.append(recipientId == null ? "" : recipientId);
+        builder.append(idOrEmpty(recipient));
         builder.append(",");
         builder.append(message == null ? "" : message);
         builder.append(",");
@@ -38,15 +45,27 @@ public class notification extends baseentity {
         return builder.toString();
     }
 
+    private void validateTicket() {
+        if (ticket == null || ticket.getId() == null || ticket.getId().isBlank()) {
+            throw new BadRequestException(TICKET_ERROR_MESSAGE);
+        }
+    }
+
+    private void validateRecipient() {
+        if (recipient == null || recipient.getId() == null || recipient.getId().isBlank()) {
+            throw new BadRequestException(USER_ERROR_MESSAGE);
+        }
+    }
+
     @Override
     public void fromCsv(String csvLine) {
         String[] data = csvhelper.splitLine(csvLine);
         applyBaseValues(data);
         if (data.length > 3) {
-            ticketId = data[3];
+            ticket = referenceFromId(data[3], ticket::new);
         }
         if (data.length > 4) {
-            recipientId = data[4];
+            recipient = referenceFromId(data[4], user::new);
         }
         if (data.length > 5) {
             message = data[5];

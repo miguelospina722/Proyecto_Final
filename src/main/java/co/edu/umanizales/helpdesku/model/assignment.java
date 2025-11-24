@@ -13,8 +13,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class assignment extends baseentity {
 
-    private String ticketId;
-    private String technicianId;
+    private ticket ticket;
+    private user technician;
     private LocalDateTime assignedAt;
     private String notes;
 
@@ -23,9 +23,9 @@ public class assignment extends baseentity {
         StringBuilder builder = new StringBuilder();
         builder.append(buildBaseCsv());
         builder.append(",");
-        builder.append(ticketId == null ? "" : ticketId);
+        builder.append(idOrEmpty(ticket));
         builder.append(",");
-        builder.append(technicianId == null ? "" : technicianId);
+        builder.append(idOrEmpty(technician));
         builder.append(",");
         if (assignedAt != null) {
             builder.append(assignedAt);
@@ -40,10 +40,10 @@ public class assignment extends baseentity {
         String[] data = csvhelper.splitLine(csvLine);
         applyBaseValues(data);
         if (data.length > 3) {
-            ticketId = data[3];
+            ticket = referenceFromId(data[3], ticket::new);
         }
         if (data.length > 4) {
-            technicianId = data[4];
+            technician = referenceFromId(data[4], user::new);
         }
         if (data.length > 5 && data[5] != null && !data[5].isEmpty()) {
             assignedAt = LocalDateTime.parse(data[5]);

@@ -1,5 +1,6 @@
 package co.edu.umanizales.helpdesku.model;
 
+import co.edu.umanizales.helpdesku.exception.BadRequestException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class category extends baseentity {
 
-    private String name;
+    private categoryname name;
     private String description;
 
     @Override
@@ -19,7 +20,7 @@ public class category extends baseentity {
         StringBuilder builder = new StringBuilder();
         builder.append(buildBaseCsv());
         builder.append(",");
-        builder.append(name == null ? "" : name);
+        builder.append(name == null ? "" : name.name());
         builder.append(",");
         builder.append(description == null ? "" : description);
         return builder.toString();
@@ -30,7 +31,7 @@ public class category extends baseentity {
         String[] data = csvhelper.splitLine(csvLine);
         applyBaseValues(data);
         if (data.length > 3) {
-            name = data[3];
+            name = parseName(data[3]);
         }
         if (data.length > 4) {
             description = data[4];
@@ -39,13 +40,24 @@ public class category extends baseentity {
 
     @Override
     public String[] headers() {
-        String[] base = baseHeaders();
-        String[] result = new String[base.length + 2];
-        for (int index = 0; index < base.length; index++) {
-            result[index] = base[index];
+        return mergeHeaders("name", "description");
+    }
+
+    public void setName(categoryname name) {
+        if (name == null) {
+            throw new BadRequestException("Asigna una categoría correcta");
         }
-        result[3] = "name";
-        result[4] = "description";
-        return result;
+        this.name = name;
+    }
+
+    public void setName(String rawName) {
+        this.name = categoryname.fromString(rawName);
+    }
+
+    private static categoryname parseName(String rawValue) {
+        if (rawValue == null || rawValue.isBlank()) {
+            return null;
+        }
+        return categoryname.fromString(rawValue);
     }
 }

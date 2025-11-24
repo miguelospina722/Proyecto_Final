@@ -24,7 +24,14 @@ curl http://localhost:8095/api/health
 - **PUT** `/api/users/{id}`
 - **DELETE** `/api/users/{id}`
 
-**Ejemplo respuesta GET (colección)**
+### Reglas de validación
+- `username` es obligatorio, no puede contener solo espacios y debe ser único en el sistema. Intentar registrar un nombre ya existente responde con **400** y mensaje `"Este usuario ya está creado"`.
+- `role` debe ser uno de los valores definidos en `userrole` (`ADMIN`, `TECHNICIAN`, `AGENT`, `USER`). Alias comunes como `administrador`, `tecnico`, `practicante` se normalizan automáticamente. Cualquier valor inválido responde con **400** y mensaje `"Asigna un rol correcto"`.
+- `contact.email` es obligatorio y debe contener `@`. Valores inválidos producen **400** y mensaje `"Debe poner un correo válido."`.
+- `active` controla el acceso del usuario. Si es `false`, toda operación que requiera al usuario (por ejemplo, asignarlo a un ticket) responderá **400** con el mensaje `"Este usuario no está activo."`.
+
+### Ejemplos exitosos
+**GET (colección)**
 ```json
 [
   {
@@ -43,7 +50,7 @@ curl http://localhost:8095/api/health
 ]
 ```
 
-**Ejemplo respuesta GET (detalle)**
+**GET (detalle)**
 ```json
 {
   "id": "8b9f9a24-9c6c-4a53-9e2e-7120f0d7a111",
@@ -51,7 +58,7 @@ curl http://localhost:8095/api/health
   "updatedAt": "2025-11-13T17:10:01.123456",
   "username": "jsmith",
   "fullName": "John Smith",
-  "role": "SUPPORT",
+  "role": "AGENT",
   "active": true,
   "contact": {
     "email": "john.smith@example.com",
@@ -60,7 +67,7 @@ curl http://localhost:8095/api/health
 }
 ```
 
-**POST / PUT JSON**
+**POST / PUT (válido)**
 ```json
 {
   "username": "jsmith",
@@ -73,6 +80,13 @@ curl http://localhost:8095/api/health
   }
 }
 ```
+
+### Ejemplos de error
+| Escenario | Petición | Respuesta |
+|-----------|----------|-----------|
+| Username duplicado | `POST /api/users` con `{"username":"jsmith"...}` cuando ya existe | `400 Bad Request`<br>`{"message":"Este usuario ya está creado"}` |
+| Rol inválido | `POST /api/users` con `"role":"super"` | `400 Bad Request`<br>`{"message":"Asigna un rol correcto"}` |
+| Correo inválido | `POST /api/users` con `"email":"john"` | `400 Bad Request`<br>`{"message":"Debe poner un correo válido."}` |
 
 **Respuesta DELETE**
 - `204 No Content` cuando la eliminación es exitosa.
@@ -94,7 +108,7 @@ curl http://localhost:8095/api/health
     "id": "1f3d64a0-7df4-4b92-a6f0-4ef34f4ae222",
     "createdAt": "2025-11-13T17:02:00.000000",
     "updatedAt": "2025-11-13T17:02:00.000000",
-    "name": "Hardware",
+    "name": "HARDWARE",
     "description": "Incidencias relacionadas con equipos y periféricos"
   }
 ]
@@ -106,7 +120,7 @@ curl http://localhost:8095/api/health
   "id": "1f3d64a0-7df4-4b92-a6f0-4ef34f4ae222",
   "createdAt": "2025-11-13T17:02:00.000000",
   "updatedAt": "2025-11-13T17:08:45.999000",
-  "name": "Hardware",
+  "name": "HARDWARE",
   "description": "Incidencias relacionadas con equipos y periféricos"
 }
 ```
@@ -114,10 +128,12 @@ curl http://localhost:8095/api/health
 **POST / PUT JSON**
 ```json
 {
-  "name": "Hardware",
+  "name": "HARDWARE",
   "description": "Incidencias relacionadas con equipos y periféricos"
 }
 ```
+
+Valores permitidos para `name`: `INFRASTRUCTURE`, `HARDWARE`, `SOFTWARE`, `APPS`, `SERVICES`. Alias como "infraestructura", "aplicaciones" o "servicios" se normalizan automáticamente. Valores inválidos generan **400** con mensaje "Asigna una categoría correcta".
 
 **Respuesta DELETE**
 - `204 No Content`
@@ -140,7 +156,6 @@ curl http://localhost:8095/api/health
     "createdAt": "2025-11-13T17:03:00.000000",
     "updatedAt": "2025-11-13T17:03:00.000000",
     "code": "IN_PROGRESS",
-    "name": "En progreso",
     "description": "El ticket está siendo trabajado por un agente"
   }
 ]
@@ -153,7 +168,6 @@ curl http://localhost:8095/api/health
   "createdAt": "2025-11-13T17:03:00.000000",
   "updatedAt": "2025-11-13T17:04:30.500000",
   "code": "IN_PROGRESS",
-  "name": "En progreso",
   "description": "El ticket está siendo trabajado por un agente"
 }
 ```
@@ -162,10 +176,11 @@ curl http://localhost:8095/api/health
 ```json
 {
   "code": "IN_PROGRESS",
-  "name": "En progreso",
   "description": "El ticket está siendo trabajado por un agente"
 }
 ```
+
+Estados válidos para `code`: `OPEN`, `ASSIGNED`, `IN_PROGRESS`, `ON_HOLD`, `RESOLVED`, `CLOSED`. Alias como "en progreso" o "cerrado" se aceptan. Valores inválidos devuelven **400** con el mensaje "Escribe un estado correcto".
 
 **Respuesta DELETE**
 - `204 No Content`
@@ -232,6 +247,8 @@ Valores permitidos para `level`: `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`.
 - **PUT** `/api/tickets/{id}`
 - **DELETE** `/api/tickets/{id}`
 
+> **Importante:** `requester.id` y `assignee.id` deben pertenecer a usuarios activos. Si alguno está inactivo se retorna **400** con el mensaje `"Este usuario no está activo."`
+
 **Ejemplo respuesta GET (colección)**
 ```json
 [
@@ -241,11 +258,26 @@ Valores permitidos para `level`: `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`.
     "updatedAt": "2025-11-13T17:05:45.000000",
     "title": "Equipo no enciende",
     "description": "El portátil no responde al botón de encendido",
-    "statusId": "ec4de150-e3dc-4596-8d2f-2503d5c239a6",
-    "categoryId": "1f3d64a0-7df4-4b92-a6f0-4ef34f4ae222",
-    "priorityId": "2c5f9d10-1234-4091-9fb2-0f5c3dbbaa33",
-    "requesterId": "8b9f9a24-9c6c-4a53-9e2e-7120f0d7a111",
-    "assigneeId": "8b9f9a24-9c6c-4a53-9e2e-7120f0d7a222",
+    "status": {
+      "id": "ec4de150-e3dc-4596-8d2f-2503d5c239a6",
+      "name": "En progreso"
+    },
+    "category": {
+      "id": "1f3d64a0-7df4-4b92-a6f0-4ef34f4ae222",
+      "name": "Hardware"
+    },
+    "priority": {
+      "id": "2c5f9d10-1234-4091-9fb2-0f5c3dbbaa33",
+      "name": "Alta"
+    },
+    "requester": {
+      "id": "8b9f9a24-9c6c-4a53-9e2e-7120f0d7a111",
+      "fullName": "John Smith"
+    },
+    "assignee": {
+      "id": "8b9f9a24-9c6c-4a53-9e2e-7120f0d7a222",
+      "fullName": "Jane Smith"
+    },
     "dueDate": "2025-11-20T18:00:00"
   }
 ]
@@ -259,11 +291,26 @@ Valores permitidos para `level`: `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`.
   "updatedAt": "2025-11-13T17:20:12.500000",
   "title": "Equipo no enciende",
   "description": "Se reemplazó la fuente de poder",
-  "statusId": "ec4de150-e3dc-4596-8d2f-2503d5c239a6",
-  "categoryId": "1f3d64a0-7df4-4b92-a6f0-4ef34f4ae222",
-  "priorityId": "2c5f9d10-1234-4091-9fb2-0f5c3dbbaa33",
-  "requesterId": "8b9f9a24-9c6c-4a53-9e2e-7120f0d7a111",
-  "assigneeId": "8b9f9a24-9c6c-4a53-9e2e-7120f0d7a333",
+  "status": {
+    "id": "ec4de150-e3dc-4596-8d2f-2503d5c239a6",
+    "name": "En progreso"
+  },
+  "category": {
+    "id": "1f3d64a0-7df4-4b92-a6f0-4ef34f4ae222",
+    "name": "Hardware"
+  },
+  "priority": {
+    "id": "2c5f9d10-1234-4091-9fb2-0f5c3dbbaa33",
+    "name": "Alta"
+  },
+  "requester": {
+    "id": "8b9f9a24-9c6c-4a53-9e2e-7120f0d7a111",
+    "fullName": "John Smith"
+  },
+  "assignee": {
+    "id": "8b9f9a24-9c6c-4a53-9e2e-7120f0d7a333",
+    "fullName": "Ana Ruiz"
+  },
   "dueDate": "2025-11-20T18:00:00"
 }
 ```
@@ -273,15 +320,32 @@ Valores permitidos para `level`: `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`.
 {
   "title": "Equipo no enciende",
   "description": "El portátil no responde al botón de encendido",
-  "statusId": "<id-status>",
-  "categoryId": "<id-categoria>",
-  "priorityId": "<id-prioridad>",
-  "requesterId": "<id-usuario-reporta>",
-  "assigneeId": "<id-usuario-asignado>",
+  "status": {
+    "id": "<id-status>"
+  },
+  "category": {
+    "id": "<id-categoria>"
+  },
+  "priority": {
+    "id": "<id-prioridad>"
+  },
+  "requester": {
+    "id": "<id-usuario-reporta>"
+  },
+  "assignee": {
+    "id": "<id-usuario-asignado>"
+  },
   "dueDate": "2025-11-20T18:00:00"
 }
 ```
-Estados válidos: `OPEN`, `ASSIGNED`, `IN_PROGRESS`, `ON_HOLD`, `RESOLVED`, `CLOSED`.
+Estados válidos: `OPEN`, `ASSIGNED`, `IN_PROGRESS`, `ON_HOLD`, `RESOLVED`, `CLOSED`. Si el código enviado no coincide con un registro existente, la respuesta será **400** con el mensaje **"Id no valido de los estados existentes"**.
+
+### Validaciones
+
+- **Estado (`status`)**: El código debe representar un estado registrado. Valor inválido → **400** `"Id no valido de los estados existentes"`.
+- **Categoría (`category`)**: Se referencia por `id`. Si no existe → **400** `"Id no valido de las categorias existentes"`.
+- **Prioridad (`priority`)**: Se referencia por `id`. Si no existe → **400** `"Id no valido de las prioridades existentes"`.
+- **Solicitante (`requester`)** y **asignado (`assignee`)**: Deben ser usuarios activos. Usuario inexistente/inactivo → **400** `"Id usuario no existente, no activo o no valido"`.
 
 **Respuesta DELETE**
 - `204 No Content`
@@ -296,6 +360,8 @@ Estados válidos: `OPEN`, `ASSIGNED`, `IN_PROGRESS`, `ON_HOLD`, `RESOLVED`, `CLO
 - **PUT** `/api/assignments/{id}`
 - **DELETE** `/api/assignments/{id}`
 
+> **Importante:** `ticket.id` debe corresponder a un ticket existente y `technician.id` debe pertenecer a un usuario activo. Consulta las validaciones para conocer los mensajes de error.
+
 **Ejemplo respuesta GET (colección)**
 ```json
 [
@@ -303,7 +369,9 @@ Estados válidos: `OPEN`, `ASSIGNED`, `IN_PROGRESS`, `ON_HOLD`, `RESOLVED`, `CLO
     "id": "b930b3af-08d0-41d8-95bc-8ecc1f05c444",
     "createdAt": "2025-11-13T17:06:30.000000",
     "updatedAt": "2025-11-13T17:06:30.000000",
-    "ticketId": "6d4c9b68-5a2f-43a2-9d5a-71f06a1cce55",
+    "ticket": {
+      "id": "6d4c9b68-5a2f-43a2-9d5a-71f06a1cce55"
+    },
     "technicianId": "8b9f9a24-9c6c-4a53-9e2e-7120f0d7a333",
     "assignedAt": "2025-11-13T10:30:00",
     "notes": "Asignado por disponibilidad del turno matutino"
@@ -317,18 +385,38 @@ Estados válidos: `OPEN`, `ASSIGNED`, `IN_PROGRESS`, `ON_HOLD`, `RESOLVED`, `CLO
   "id": "b930b3af-08d0-41d8-95bc-8ecc1f05c444",
   "createdAt": "2025-11-13T17:06:30.000000",
   "updatedAt": "2025-11-13T17:10:45.250000",
-  "ticketId": "6d4c9b68-5a2f-43a2-9d5a-71f06a1cce55",
-  "technicianId": "8b9f9a24-9c6c-4a53-9e2e-7120f0d7a333",
+  "ticket": {
+    "id": "b6e793eb-cb3c-4b62-a1ac-872d85f1c111"
+  },
+  "technician": {
+    "id": "6f8e0d1e-dccd-4f66-9f37-228d1a8c3333"
+  },
   "assignedAt": "2025-11-13T10:30:00",
   "notes": "Asignado por disponibilidad del turno matutino"
 }
 ```
 
+### Validaciones
+
+- **Ticket (`ticket`)**: Debe enviarse un `id` válido. Si no existe → **400** `"Ticket no encontrado"`.
+- **Técnico (`technician`)**: Debe enviarse un `id` válido de usuario activo. Si el usuario no existe, está inactivo o el id es inválido → **400** `"Id usuario no existente, no activo o no valido"`.
+
+#### Errores comunes
+
+| Escenario | Código | Mensaje |
+|----------|--------|---------|
+| `ticket.id` no suministrado o inexistente | 400 | **`Ticket no encontrado`** |
+| `technician.id` inexistente o inactivo | 400 | **`Id usuario no existente, no activo o no valido`** |
+
 **POST / PUT JSON**
 ```json
 {
-  "ticketId": "<id-ticket>",
-  "technicianId": "<id-tecnico>",
+  "ticket": {
+    "id": "<id-ticket>"
+  },
+  "technician": {
+    "id": "<id-tecnico>"
+  },
   "assignedAt": "2025-11-13T10:30:00",
   "notes": "Asignado por disponibilidad del turno matutino"
 }
@@ -347,6 +435,8 @@ Estados válidos: `OPEN`, `ASSIGNED`, `IN_PROGRESS`, `ON_HOLD`, `RESOLVED`, `CLO
 - **PUT** `/api/comments/{id}`
 - **DELETE** `/api/comments/{id}`
 
+> **Importante:** `author.id` debe referenciar un usuario activo. Si el usuario no existe, está inactivo o el id es inválido la API responde **400** con "Id usuario no existente, no activo o no valido".
+
 **Ejemplo respuesta GET (colección)**
 ```json
 [
@@ -354,8 +444,12 @@ Estados válidos: `OPEN`, `ASSIGNED`, `IN_PROGRESS`, `ON_HOLD`, `RESOLVED`, `CLO
     "id": "c4f107f1-0a4e-48d9-9d08-b5016b765555",
     "createdAt": "2025-11-13T17:07:00.000000",
     "updatedAt": "2025-11-13T17:07:00.000000",
-    "ticketId": "6d4c9b68-5a2f-43a2-9d5a-71f06a1cce55",
-    "authorId": "8b9f9a24-9c6c-4a53-9e2e-7120f0d7a111",
+    "ticket": {
+      "id": "9fe5217d-1140-4c6f-a7f5-7cbe3394b222"
+    },
+    "author": {
+      "id": "8b9f9a24-9c6c-4a53-9e2e-7120f0d7a111"
+    },
     "content": "Se solicitó al usuario reiniciar el equipo",
     "commentedAt": "2025-11-13T11:15:00"
   }
@@ -368,8 +462,12 @@ Estados válidos: `OPEN`, `ASSIGNED`, `IN_PROGRESS`, `ON_HOLD`, `RESOLVED`, `CLO
   "id": "c4f107f1-0a4e-48d9-9d08-b5016b765555",
   "createdAt": "2025-11-13T17:07:00.000000",
   "updatedAt": "2025-11-13T17:12:12.654321",
-  "ticketId": "6d4c9b68-5a2f-43a2-9d5a-71f06a1cce55",
-  "authorId": "8b9f9a24-9c6c-4a53-9e2e-7120f0d7a111",
+  "ticket": {
+    "id": "9fe5217d-1140-4c6f-a7f5-7cbe3394b222"
+  },
+  "author": {
+    "id": "8b9f9a24-9c6c-4a53-9e2e-7120f0d7a111"
+  },
   "content": "Se validó con el usuario, problema resuelto",
   "commentedAt": "2025-11-13T11:45:00"
 }
@@ -378,8 +476,12 @@ Estados válidos: `OPEN`, `ASSIGNED`, `IN_PROGRESS`, `ON_HOLD`, `RESOLVED`, `CLO
 **POST / PUT JSON**
 ```json
 {
-  "ticketId": "<id-ticket>",
-  "authorId": "<id-autor>",
+  "ticket": {
+    "id": "<id-ticket>"
+  },
+  "author": {
+    "id": "<id-autor>"
+  },
   "content": "Se solicitó al usuario reiniciar el equipo",
   "commentedAt": "2025-11-13T11:15:00"
 }
@@ -397,6 +499,9 @@ Estados válidos: `OPEN`, `ASSIGNED`, `IN_PROGRESS`, `ON_HOLD`, `RESOLVED`, `CLO
 - **POST** `/api/attachments`
 - **PUT** `/api/attachments/{id}`
 - **DELETE** `/api/attachments/{id}`
+
+### Validaciones
+- **Ticket (`ticket.id`)**: Debe existir en el sistema. Valor faltante o inexistente → **400** con mensaje `"Ticket no encontrado"`.
 
 **Ejemplo respuesta GET (colección)**
 ```json
@@ -449,6 +554,9 @@ Estados válidos: `OPEN`, `ASSIGNED`, `IN_PROGRESS`, `ON_HOLD`, `RESOLVED`, `CLO
 - **PUT** `/api/slas/{id}`
 - **DELETE** `/api/slas/{id}`
 
+### Validaciones
+- **Ticket (`ticket.id`)**: Debe existir en el sistema. Valor faltante o inexistente → **400** con mensaje `"Ticket no encontrado"`.
+
 **Ejemplo respuesta GET (colección)**
 ```json
 [
@@ -500,6 +608,10 @@ Estados válidos: `OPEN`, `ASSIGNED`, `IN_PROGRESS`, `ON_HOLD`, `RESOLVED`, `CLO
 - **PUT** `/api/notifications/{id}`
 - **DELETE** `/api/notifications/{id}`
 
+### Validaciones
+- **Ticket (`ticket.id`)**: Debe existir en el sistema. Valor faltante o inexistente → **400** con mensaje `"Ticket no encontrado"`.
+- **Destinatario (`recipient.id`)**: Debe ser un usuario activo. Valor faltante, usuario inactivo o inexistente → **400** con mensaje `"Id usuario no existente, no activo o no valido"`.
+
 **Ejemplo respuesta GET (colección)**
 ```json
 [
@@ -507,8 +619,12 @@ Estados válidos: `OPEN`, `ASSIGNED`, `IN_PROGRESS`, `ON_HOLD`, `RESOLVED`, `CLO
     "id": "f7c9bd6e-e2e3-4127-9f1d-1c6fa6c68888",
     "createdAt": "2025-11-13T17:08:30.000000",
     "updatedAt": "2025-11-13T17:08:30.000000",
-    "ticketId": "6d4c9b68-5a2f-43a2-9d5a-71f06a1cce55",
-    "recipientId": "8b9f9a24-9c6c-4a53-9e2e-7120f0d7a111",
+    "ticket": {
+      "id": "6d4c9b68-5a2f-43a2-9d5a-71f06a1cce55"
+    },
+    "recipient": {
+      "id": "8b9f9a24-9c6c-4a53-9e2e-7120f0d7a111"
+    },
     "message": "El ticket ha sido actualizado",
     "sentAt": "2025-11-13T12:05:00",
     "read": false
@@ -522,8 +638,12 @@ Estados válidos: `OPEN`, `ASSIGNED`, `IN_PROGRESS`, `ON_HOLD`, `RESOLVED`, `CLO
   "id": "f7c9bd6e-e2e3-4127-9f1d-1c6fa6c68888",
   "createdAt": "2025-11-13T17:08:30.000000",
   "updatedAt": "2025-11-13T17:13:20.222000",
-  "ticketId": "6d4c9b68-5a2f-43a2-9d5a-71f06a1cce55",
-  "recipientId": "8b9f9a24-9c6c-4a53-9e2e-7120f0d7a111",
+  "ticket": {
+    "id": "6d4c9b68-5a2f-43a2-9d5a-71f06a1cce55"
+  },
+  "recipient": {
+    "id": "8b9f9a24-9c6c-4a53-9e2e-7120f0d7a111"
+  },
   "message": "El ticket ha sido actualizado",
   "sentAt": "2025-11-13T12:05:00",
   "read": true
@@ -533,8 +653,12 @@ Estados válidos: `OPEN`, `ASSIGNED`, `IN_PROGRESS`, `ON_HOLD`, `RESOLVED`, `CLO
 **POST / PUT JSON**
 ```json
 {
-  "ticketId": "<id-ticket>",
-  "recipientId": "<id-usuario>",
+  "ticket": {
+    "id": "<id-ticket>"
+  },
+  "recipient": {
+    "id": "<id-usuario>"
+  },
   "message": "El ticket ha sido actualizado",
   "sentAt": "2025-11-13T12:05:00",
   "read": false
@@ -553,7 +677,7 @@ Estados válidos: `OPEN`, `ASSIGNED`, `IN_PROGRESS`, `ON_HOLD`, `RESOLVED`, `CLO
 ```bash
 curl -X POST "http://localhost:8095/api/users" ^
   -H "Content-Type: application/json" ^
-  -d "{\"username\":\"jsmith\",\"fullName\":\"John Smith\",\"role\":\"AGENT\",\"active\":true}"
+  -d "{\"username\":\"jsmith\",\"fullName\":\"John Smith\",\"role\":\"AGENT\",\"password\":\"Str0ngP@ssw0rd!\",\"active\":true}"
 ```
 
 ### Ejemplo `curl` para actualizar un recurso
