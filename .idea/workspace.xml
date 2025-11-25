@@ -22,8 +22,6 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/statuscontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/statuscontroller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/ticketcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/ticketcontroller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/usercontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/usercontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/exception/BadRequestException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/exception/BadRequestException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/exception/GlobalExceptionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/helpdesk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/helpdesk.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/assignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/assignment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/attachment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/attachment.java" afterDir="false" />
@@ -43,7 +41,6 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/user.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/user.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/usercontact.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/usercontact.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/userrole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/userrole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/EndpointCatalogChangedEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/EndpointCatalogChangedEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/assignmentservice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/assignmentservice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/attachmentservice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/attachmentservice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/categoryservice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/categoryservice.java" afterDir="false" />
@@ -142,7 +139,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/INDUMA/Documents/Proyecto_Final_Programacion1/HelpDesk_U",
+    "last_opened_file_path": "C:/Users/INDUMA/Documents/Proyecto_Final_Programacion1/Copias/HelpDesk_U",
     "onboarding.tips.debug.path": "C:/Users/INDUMA/Documents/Proyecto_Final_Programacion1/HelpDesk_U/src/Main.java",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
