@@ -13,27 +13,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.umanizales.helpdesku.model.assignment;
-import co.edu.umanizales.helpdesku.service.assignmentservice;
+import co.edu.umanizales.helpdesku.model.Assignment;
+import co.edu.umanizales.helpdesku.service.AssignmentService;
 
 @RestController
 @RequestMapping("/api/assignments")
-public class assignmentcontroller {
+public class AssignmentController {
 
-    private final assignmentservice assignmentService;
+    private final AssignmentService assignmentService;
 
-    public assignmentcontroller(assignmentservice assignmentService) {
+    public AssignmentController(AssignmentService assignmentService) {
         this.assignmentService = assignmentService;
     }
 
     @GetMapping
-    public ResponseEntity<List<assignment>> getAll() {
+    public ResponseEntity<List<Assignment>> getAll() {
         return ResponseEntity.ok(assignmentService.list());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<assignment> getById(@PathVariable String id) {
-        assignment found = assignmentService.getById(id);
+    public ResponseEntity<Assignment> getById(@PathVariable String id) {
+        Assignment found = assignmentService.getById(id);
         if (found == null) {
             return ResponseEntity.notFound().build();
         }
@@ -41,15 +41,15 @@ public class assignmentcontroller {
     }
 
     @PostMapping
-    public ResponseEntity<assignment> create(@RequestBody assignment request) {
+    public ResponseEntity<Assignment> create(@RequestBody Assignment request) {
         request.setId(null);
-        assignment saved = assignmentService.saveAssignment(request);
+        Assignment saved = assignmentService.saveAssignment(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<assignment> update(@PathVariable String id, @RequestBody assignment request) {
-        assignment existing = assignmentService.getById(id);
+    public ResponseEntity<Assignment> update(@PathVariable String id, @RequestBody Assignment request) {
+        Assignment existing = assignmentService.getById(id);
         if (existing == null) {
             return ResponseEntity.notFound().build();
         }

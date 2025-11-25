@@ -1,6 +1,6 @@
 package co.edu.umanizales.helpdesku.model;
 
-public interface csvpersistable {
+public interface CsvPersistable {
 
     String toCsv();
 

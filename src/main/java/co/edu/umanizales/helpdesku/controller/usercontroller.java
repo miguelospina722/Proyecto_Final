@@ -13,28 +13,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.umanizales.helpdesku.model.user;
-import co.edu.umanizales.helpdesku.service.userservice;
+import co.edu.umanizales.helpdesku.model.User;
+import co.edu.umanizales.helpdesku.service.UserService;
 
 @RestController
 @RequestMapping("/api/users")
-public class usercontroller {
+public class UserController {
 
-    private final userservice userService;
+    private final UserService userService;
 
-    public usercontroller(userservice userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping
-    public ResponseEntity<List<user>> getAll() {
-        List<user> users = userService.list();
+    public ResponseEntity<List<User>> getAll() {
+        List<User> users = userService.list();
         return ResponseEntity.ok(users);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<user> getById(@PathVariable String id) {
-        user found = userService.getById(id);
+    public ResponseEntity<User> getById(@PathVariable String id) {
+        User found = userService.getById(id);
         if (found == null) {
             return ResponseEntity.notFound().build();
         }
@@ -42,21 +42,21 @@ public class usercontroller {
     }
 
     @PostMapping
-    public ResponseEntity<user> create(@RequestBody user request) {
+    public ResponseEntity<User> create(@RequestBody User request) {
         request.setId(null);
-        user saved = userService.saveUser(request);
+        User saved = userService.saveUser(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 /* Loombook */
     @PutMapping("/{id}")
-    public ResponseEntity<user> update(@PathVariable String id, @RequestBody user request) {
-        user existing = userService.getById(id);
+    public ResponseEntity<User> update(@PathVariable String id, @RequestBody User request) {
+        User existing = userService.getById(id);
         if (existing == null) {
             return ResponseEntity.notFound().build();
         }
         request.setId(id);
         request.setCreatedAt(existing.getCreatedAt());
-        user updated = userService.saveUser(request);
+        User updated = userService.saveUser(request);
         return ResponseEntity.ok(updated);
     }
 

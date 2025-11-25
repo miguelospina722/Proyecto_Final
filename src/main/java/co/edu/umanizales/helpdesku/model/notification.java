@@ -13,13 +13,13 @@ import co.edu.umanizales.helpdesku.exception.BadRequestException;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class notification extends baseentity {
+public class Notification extends BaseEntity {
 
     private static final String TICKET_ERROR_MESSAGE = "Ticket no encontrado";
     private static final String USER_ERROR_MESSAGE = "Id usuario no existente, no activo o no valido";
 
-    private ticket ticket;
-    private user recipient;
+    private Ticket ticket;
+    private User recipient;
     private String message;
     private LocalDateTime sentAt;
     private boolean read;
@@ -28,20 +28,12 @@ public class notification extends baseentity {
     public String toCsv() {
         validateTicket();
         validateRecipient();
-        StringBuilder builder = new StringBuilder();
-        builder.append(buildBaseCsv());
-        builder.append(",");
-        builder.append(idOrEmpty(ticket));
-        builder.append(",");
-        builder.append(idOrEmpty(recipient));
-        builder.append(",");
-        builder.append(message == null ? "" : message);
-        builder.append(",");
-        if (sentAt != null) {
-            builder.append(sentAt);
-        }
-        builder.append(",");
-        builder.append(read);
+        StringBuilder builder = new StringBuilder(buildBaseCsv());
+        appendEntityId(builder, ticket);
+        appendEntityId(builder, recipient);
+        appendString(builder, message);
+        appendNullable(builder, sentAt);
+        appendString(builder, Boolean.toString(read));
         return builder.toString();
     }
 
@@ -59,23 +51,13 @@ public class notification extends baseentity {
 
     @Override
     public void fromCsv(String csvLine) {
-        String[] data = csvhelper.splitLine(csvLine);
+        String[] data = CsvHelper.splitLine(csvLine);
         applyBaseValues(data);
-        if (data.length > 3) {
-            ticket = referenceFromId(data[3], ticket::new);
-        }
-        if (data.length > 4) {
-            recipient = referenceFromId(data[4], user::new);
-        }
-        if (data.length > 5) {
-            message = data[5];
-        }
-        if (data.length > 6 && data[6] != null && !data[6].isEmpty()) {
-            sentAt = LocalDateTime.parse(data[6]);
-        }
-        if (data.length > 7 && data[7] != null && !data[7].isEmpty()) {
-            read = Boolean.parseBoolean(data[7]);
-        }
+        ticket = parseReference(data, 3, Ticket::new);
+        recipient = parseReference(data, 4, User::new);
+        message = valueAt(data, 5);
+        sentAt = parseDateTime(valueAt(data, 6));
+        read = parseBoolean(valueAt(data, 7));
     }
 
     @Override

@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class helpdesk {
+public class Helpdesk {
 
     public static void main(String[] args) {
-        SpringApplication.run(helpdesk.class, args);
+        SpringApplication.run(Helpdesk.class, args);
     }
 }

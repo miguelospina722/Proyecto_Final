@@ -13,27 +13,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.umanizales.helpdesku.model.priority;
-import co.edu.umanizales.helpdesku.service.priorityservice;
+import co.edu.umanizales.helpdesku.model.Priority;
+import co.edu.umanizales.helpdesku.service.PriorityService;
 
 @RestController
 @RequestMapping("/api/priorities")
-public class prioritycontroller {
+public class PriorityController {
 
-    private final priorityservice priorityService;
+    private final PriorityService priorityService;
 
-    public prioritycontroller(priorityservice priorityService) {
+    public PriorityController(PriorityService priorityService) {
         this.priorityService = priorityService;
     }
 
     @GetMapping
-    public ResponseEntity<List<priority>> getAll() {
+    public ResponseEntity<List<Priority>> getAll() {
         return ResponseEntity.ok(priorityService.list());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<priority> getById(@PathVariable String id) {
-        priority found = priorityService.getById(id);
+    public ResponseEntity<Priority> getById(@PathVariable String id) {
+        Priority found = priorityService.getById(id);
         if (found == null) {
             return ResponseEntity.notFound().build();
         }
@@ -41,15 +41,15 @@ public class prioritycontroller {
     }
 
     @PostMapping
-    public ResponseEntity<priority> create(@RequestBody priority request) {
+    public ResponseEntity<Priority> create(@RequestBody Priority request) {
         request.setId(null);
-        priority saved = priorityService.savePriority(request);
+        Priority saved = priorityService.savePriority(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<priority> update(@PathVariable String id, @RequestBody priority request) {
-        priority existing = priorityService.getById(id);
+    public ResponseEntity<Priority> update(@PathVariable String id, @RequestBody Priority request) {
+        Priority existing = priorityService.getById(id);
         if (existing == null) {
             return ResponseEntity.notFound().build();
         }

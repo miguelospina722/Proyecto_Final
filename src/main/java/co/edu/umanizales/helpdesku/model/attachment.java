@@ -11,11 +11,11 @@ import co.edu.umanizales.helpdesku.exception.BadRequestException;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class attachment extends baseentity {
+public class Attachment extends BaseEntity {
 
     private static final String TICKET_ERROR_MESSAGE = "Ticket no encontrado";
 
-    private ticket ticket;
+    private Ticket ticket;
     private String fileName;
     private String filePath;
     private long sizeBytes;
@@ -23,16 +23,11 @@ public class attachment extends baseentity {
     @Override
     public String toCsv() {
         validateTicket();
-        StringBuilder builder = new StringBuilder();
-        builder.append(buildBaseCsv());
-        builder.append(",");
-        builder.append(idOrEmpty(ticket));
-        builder.append(",");
-        builder.append(fileName == null ? "" : fileName);
-        builder.append(",");
-        builder.append(filePath == null ? "" : filePath);
-        builder.append(",");
-        builder.append(sizeBytes);
+        StringBuilder builder = new StringBuilder(buildBaseCsv());
+        appendEntityId(builder, ticket);
+        appendString(builder, fileName);
+        appendString(builder, filePath);
+        appendNullable(builder, sizeBytes);
         return builder.toString();
     }
 
@@ -44,20 +39,13 @@ public class attachment extends baseentity {
 
     @Override
     public void fromCsv(String csvLine) {
-        String[] data = csvhelper.splitLine(csvLine);
+        String[] data = CsvHelper.splitLine(csvLine);
         applyBaseValues(data);
-        if (data.length > 3) {
-            ticket = referenceFromId(data[3], ticket::new);
-        }
-        if (data.length > 4) {
-            fileName = data[4];
-        }
-        if (data.length > 5) {
-            filePath = data[5];
-        }
-        if (data.length > 6 && data[6] != null && !data[6].isEmpty()) {
-            sizeBytes = Long.parseLong(data[6]);
-        }
+        ticket = referenceFromId(valueAt(data, 3), Ticket::new);
+        fileName = valueAt(data, 4);
+        filePath = valueAt(data, 5);
+        Long parsedSize = parseLong(valueAt(data, 6));
+        sizeBytes = parsedSize == null ? 0L : parsedSize;
     }
 
     @Override

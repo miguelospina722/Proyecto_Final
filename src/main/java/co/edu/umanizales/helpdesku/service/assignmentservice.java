@@ -5,30 +5,30 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import co.edu.umanizales.helpdesku.exception.BadRequestException;
-import co.edu.umanizales.helpdesku.model.assignment;
-import co.edu.umanizales.helpdesku.model.ticket;
-import co.edu.umanizales.helpdesku.model.user;
+import co.edu.umanizales.helpdesku.model.Assignment;
+import co.edu.umanizales.helpdesku.model.Ticket;
+import co.edu.umanizales.helpdesku.model.User;
 
 @Service
-public class assignmentservice extends csvbaseservice<assignment> {
+public class AssignmentService extends CsvBaseService<Assignment> {
 
-    private final userservice userService;
-    private final ticketservice ticketService;
+    private final UserService userService;
+    private final TicketService ticketService;
 
-    public assignmentservice(userservice userService, ticketservice ticketService) {
+    public AssignmentService(UserService userService, TicketService ticketService) {
         super("assignments.csv");
         this.userService = userService;
         this.ticketService = ticketService;
     }
 
     @Override
-    protected assignment createEmpty() {
-        return new assignment();
+    protected Assignment createEmpty() {
+        return new Assignment();
     }
 
     @Override
     protected String[] headerRow() {
-        assignment sample = new assignment();
+        Assignment sample = new Assignment();
         String[] headers = sample.headers();
         String[] copy = new String[headers.length];
         for (int index = 0; index < headers.length; index++) {
@@ -37,19 +37,19 @@ public class assignmentservice extends csvbaseservice<assignment> {
         return copy;
     }
 
-    public List<assignment> list() {
-        List<assignment> assignments = findAll();
+    public List<Assignment> list() {
+        List<Assignment> assignments = findAll();
         for (int index = 0; index < assignments.size(); index++) {
             hydrate(assignments.get(index));
         }
         return assignments;
     }
 
-    public assignment getById(String id) {
+    public Assignment getById(String id) {
         return hydrate(findById(id));
     }
 
-    public assignment saveAssignment(assignment entity) {
+    public Assignment saveAssignment(Assignment entity) {
         ensureTicketExists(entity);
         ensureActiveTechnician(entity);
         return save(entity);
@@ -59,8 +59,8 @@ public class assignmentservice extends csvbaseservice<assignment> {
         return delete(id);
     }
 
-    private void ensureActiveTechnician(assignment entity) {
-        user technician = entity.getTechnician();
+    private void ensureActiveTechnician(Assignment entity) {
+        User technician = entity.getTechnician();
         if (technician == null || technician.getId() == null || technician.getId().isBlank()) {
             throw new BadRequestException("Id usuario no existente, no activo o no valido");
         }
@@ -71,32 +71,32 @@ public class assignmentservice extends csvbaseservice<assignment> {
         }
     }
 
-    private void ensureTicketExists(assignment entity) {
-        ticket reference = entity.getTicket();
+    private void ensureTicketExists(Assignment entity) {
+        Ticket reference = entity.getTicket();
         if (reference == null || reference.getId() == null || reference.getId().isBlank()) {
             throw new BadRequestException("Ticket no encontrado");
         }
-        ticket stored = ticketService.getById(reference.getId());
+        Ticket stored = ticketService.getById(reference.getId());
         if (stored == null) {
             throw new BadRequestException("Ticket no encontrado");
         }
         entity.setTicket(stored);
     }
 
-    private assignment hydrate(assignment entity) {
+    private Assignment hydrate(Assignment entity) {
         if (entity == null) {
             return null;
         }
-        ticket ticket = entity.getTicket();
+        Ticket ticket = entity.getTicket();
         if (ticket != null && ticket.getId() != null && !ticket.getId().isBlank()) {
-            ticket storedTicket = ticketService.getById(ticket.getId());
+            Ticket storedTicket = ticketService.getById(ticket.getId());
             if (storedTicket != null) {
                 entity.setTicket(storedTicket);
             }
         }
-        user technician = entity.getTechnician();
+        User technician = entity.getTechnician();
         if (technician != null && technician.getId() != null && !technician.getId().isBlank()) {
-            user storedUser = userService.getById(technician.getId());
+            User storedUser = userService.getById(technician.getId());
             if (storedUser != null) {
                 entity.setTechnician(storedUser);
             }

@@ -10,15 +10,15 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ticket extends baseentity {
+public class Ticket extends BaseEntity {
 
     private String title;
     private String description;
-    private status status;
-    private category category;
-    private priority priority;
-    private user requester;
-    private user assignee;
+    private Status status;
+    private Category category;
+    private Priority priority;
+    private User requester;
+    private User assignee;
     private LocalDateTime dueDate;
 
     @Override
@@ -48,7 +48,7 @@ public class ticket extends baseentity {
 
     @Override
     public void fromCsv(String csvLine) {
-        String[] data = csvhelper.splitLine(csvLine);
+        String[] data = CsvHelper.splitLine(csvLine);
         applyBaseValues(data);
         if (data.length > 3) {
             title = data[3];
@@ -57,11 +57,11 @@ public class ticket extends baseentity {
             description = data[4];
         }
         int legacyOffset = data.length > 11 ? 1 : 0;
-        status = referenceFromId(valueAt(data, 5 + legacyOffset), status::new);
-        category = referenceFromId(valueAt(data, 6 + legacyOffset), category::new);
-        priority = referenceFromId(valueAt(data, 7 + legacyOffset), priority::new);
-        requester = referenceFromId(valueAt(data, 8 + legacyOffset), user::new);
-        assignee = referenceFromId(valueAt(data, 9 + legacyOffset), user::new);
+        status = referenceFromId(valueAt(data, 5 + legacyOffset), Status::new);
+        category = referenceFromId(valueAt(data, 6 + legacyOffset), Category::new);
+        priority = referenceFromId(valueAt(data, 7 + legacyOffset), Priority::new);
+        requester = referenceFromId(valueAt(data, 8 + legacyOffset), User::new);
+        assignee = referenceFromId(valueAt(data, 9 + legacyOffset), User::new);
         int dueDateIndex = 10 + legacyOffset;
         if (data.length > dueDateIndex && data[dueDateIndex] != null && !data[dueDateIndex].isEmpty()) {
             dueDate = LocalDateTime.parse(data[dueDateIndex]);

@@ -13,27 +13,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.umanizales.helpdesku.model.sla;
-import co.edu.umanizales.helpdesku.service.slaservice;
+import co.edu.umanizales.helpdesku.model.Sla;
+import co.edu.umanizales.helpdesku.service.SlaService;
 
 @RestController
 @RequestMapping("/api/slas")
-public class slacontroller {
+public class SlaController {
 
-    private final slaservice slaService;
+    private final SlaService slaService;
 
-    public slacontroller(slaservice slaService) {
+    public SlaController(SlaService slaService) {
         this.slaService = slaService;
     }
 
     @GetMapping
-    public ResponseEntity<List<sla>> getAll() {
+    public ResponseEntity<List<Sla>> getAll() {
         return ResponseEntity.ok(slaService.list());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<sla> getById(@PathVariable String id) {
-        sla found = slaService.getById(id);
+    public ResponseEntity<Sla> getById(@PathVariable String id) {
+        Sla found = slaService.getById(id);
         if (found == null) {
             return ResponseEntity.notFound().build();
         }
@@ -41,15 +41,15 @@ public class slacontroller {
     }
 
     @PostMapping
-    public ResponseEntity<sla> create(@RequestBody sla request) {
+    public ResponseEntity<Sla> create(@RequestBody Sla request) {
         request.setId(null);
-        sla saved = slaService.saveSla(request);
+        Sla saved = slaService.saveSla(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<sla> update(@PathVariable String id, @RequestBody sla request) {
-        sla existing = slaService.getById(id);
+    public ResponseEntity<Sla> update(@PathVariable String id, @RequestBody Sla request) {
+        Sla existing = slaService.getById(id);
         if (existing == null) {
             return ResponseEntity.notFound().build();
         }

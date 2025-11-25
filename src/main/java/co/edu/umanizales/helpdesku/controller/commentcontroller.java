@@ -13,27 +13,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.umanizales.helpdesku.model.comment;
-import co.edu.umanizales.helpdesku.service.commentservice;
+import co.edu.umanizales.helpdesku.model.Comment;
+import co.edu.umanizales.helpdesku.service.CommentService;
 
 @RestController
 @RequestMapping("/api/comments")
-public class commentcontroller {
+public class CommentController {
 
-    private final commentservice commentService;
+    private final CommentService commentService;
 
-    public commentcontroller(commentservice commentService) {
+    public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
 
     @GetMapping
-    public ResponseEntity<List<comment>> getAll() {
+    public ResponseEntity<List<Comment>> getAll() {
         return ResponseEntity.ok(commentService.list());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<comment> getById(@PathVariable String id) {
-        comment found = commentService.getById(id);
+    public ResponseEntity<Comment> getById(@PathVariable String id) {
+        Comment found = commentService.getById(id);
         if (found == null) {
             return ResponseEntity.notFound().build();
         }
@@ -41,15 +41,15 @@ public class commentcontroller {
     }
 
     @PostMapping
-    public ResponseEntity<comment> create(@RequestBody comment request) {
+    public ResponseEntity<Comment> create(@RequestBody Comment request) {
         request.setId(null);
-        comment saved = commentService.saveComment(request);
+        Comment saved = commentService.saveComment(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<comment> update(@PathVariable String id, @RequestBody comment request) {
-        comment existing = commentService.getById(id);
+    public ResponseEntity<Comment> update(@PathVariable String id, @RequestBody Comment request) {
+        Comment existing = commentService.getById(id);
         if (existing == null) {
             return ResponseEntity.notFound().build();
         }

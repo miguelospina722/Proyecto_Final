@@ -4,23 +4,23 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import co.edu.umanizales.helpdesku.model.priority;
+import co.edu.umanizales.helpdesku.model.Priority;
 
 @Service
-public class priorityservice extends csvbaseservice<priority> {
+public class PriorityService extends CsvBaseService<Priority> {
 
-    public priorityservice() {
+    public PriorityService() {
         super("priorities.csv");
     }
 
     @Override
-    protected priority createEmpty() {
-        return new priority();
+    protected Priority createEmpty() {
+        return new Priority();
     }
 
     @Override
     protected String[] headerRow() {
-        priority sample = new priority();
+        Priority sample = new Priority();
         String[] headers = sample.headers();
         String[] copy = new String[headers.length];
         for (int index = 0; index < headers.length; index++) {
@@ -29,15 +29,15 @@ public class priorityservice extends csvbaseservice<priority> {
         return copy;
     }
 
-    public List<priority> list() {
+    public List<Priority> list() {
         return findAll();
     }
 
-    public priority getById(String id) {
+    public Priority getById(String id) {
         return findById(id);
     }
 
-    public priority savePriority(priority entity) {
+    public Priority savePriority(Priority entity) {
         return save(entity);
     }
 

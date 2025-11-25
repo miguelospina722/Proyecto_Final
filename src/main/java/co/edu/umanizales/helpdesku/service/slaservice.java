@@ -5,27 +5,27 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import co.edu.umanizales.helpdesku.exception.BadRequestException;
-import co.edu.umanizales.helpdesku.model.sla;
-import co.edu.umanizales.helpdesku.model.ticket;
+import co.edu.umanizales.helpdesku.model.Sla;
+import co.edu.umanizales.helpdesku.model.Ticket;
 
 @Service
-public class slaservice extends csvbaseservice<sla> {
+public class SlaService extends CsvBaseService<Sla> {
 
-    private final ticketservice ticketService;
+    private final TicketService ticketService;
 
-    public slaservice(ticketservice ticketService) {
+    public SlaService(TicketService ticketService) {
         super("sla.csv");
         this.ticketService = ticketService;
     }
 
     @Override
-    protected sla createEmpty() {
-        return new sla();
+    protected Sla createEmpty() {
+        return new Sla();
     }
 
     @Override
     protected String[] headerRow() {
-        sla sample = new sla();
+        Sla sample = new Sla();
         String[] headers = sample.headers();
         String[] copy = new String[headers.length];
         for (int index = 0; index < headers.length; index++) {
@@ -34,19 +34,19 @@ public class slaservice extends csvbaseservice<sla> {
         return copy;
     }
 
-    public List<sla> list() {
-        List<sla> slas = findAll();
+    public List<Sla> list() {
+        List<Sla> slas = findAll();
         for (int index = 0; index < slas.size(); index++) {
             hydrate(slas.get(index));
         }
         return slas;
     }
 
-    public sla getById(String id) {
+    public Sla getById(String id) {
         return hydrate(findById(id));
     }
 
-    public sla saveSla(sla entity) {
+    public Sla saveSla(Sla entity) {
         ensureTicketExists(entity);
         return save(entity);
     }
@@ -55,13 +55,13 @@ public class slaservice extends csvbaseservice<sla> {
         return delete(id);
     }
 
-    private sla hydrate(sla entity) {
+    private Sla hydrate(Sla entity) {
         if (entity == null) {
             return null;
         }
-        ticket ticket = entity.getTicket();
+        Ticket ticket = entity.getTicket();
         if (ticket != null && ticket.getId() != null && !ticket.getId().isBlank()) {
-            ticket storedTicket = ticketService.getDetailedCopyById(ticket.getId());
+            Ticket storedTicket = ticketService.getDetailedCopyById(ticket.getId());
             if (storedTicket != null) {
                 entity.setTicket(storedTicket);
             }
@@ -69,12 +69,12 @@ public class slaservice extends csvbaseservice<sla> {
         return entity;
     }
 
-    private void ensureTicketExists(sla entity) {
-        ticket reference = entity.getTicket();
+    private void ensureTicketExists(Sla entity) {
+        Ticket reference = entity.getTicket();
         if (reference == null || reference.getId() == null || reference.getId().isBlank()) {
             throw new BadRequestException("Ticket no encontrado");
         }
-        ticket stored = ticketService.getDetailedCopyById(reference.getId());
+        Ticket stored = ticketService.getDetailedCopyById(reference.getId());
         if (stored == null) {
             throw new BadRequestException("Ticket no encontrado");
         }

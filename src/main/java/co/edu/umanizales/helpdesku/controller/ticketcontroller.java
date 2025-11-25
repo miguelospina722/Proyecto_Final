@@ -13,27 +13,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.umanizales.helpdesku.model.ticket;
-import co.edu.umanizales.helpdesku.service.ticketservice;
+import co.edu.umanizales.helpdesku.model.Ticket;
+import co.edu.umanizales.helpdesku.service.TicketService;
 
 @RestController
 @RequestMapping("/api/tickets")
-public class ticketcontroller {
+public class TicketController {
 
-    private final ticketservice ticketService;
+    private final TicketService ticketService;
 
-    public ticketcontroller(ticketservice ticketService) {
+    public TicketController(TicketService ticketService) {
         this.ticketService = ticketService;
     }
 
     @GetMapping
-    public ResponseEntity<List<ticket>> getAll() {
+    public ResponseEntity<List<Ticket>> getAll() {
         return ResponseEntity.ok(ticketService.list());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ticket> getById(@PathVariable String id) {
-        ticket found = ticketService.getById(id);
+    public ResponseEntity<Ticket> getById(@PathVariable String id) {
+        Ticket found = ticketService.getById(id);
         if (found == null) {
             return ResponseEntity.notFound().build();
         }
@@ -41,15 +41,15 @@ public class ticketcontroller {
     }
 
     @PostMapping
-    public ResponseEntity<ticket> create(@RequestBody ticket request) {
+    public ResponseEntity<Ticket> create(@RequestBody Ticket request) {
         request.setId(null);
-        ticket saved = ticketService.saveTicket(request);
+        Ticket saved = ticketService.saveTicket(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ticket> update(@PathVariable String id, @RequestBody ticket request) {
-        ticket existing = ticketService.getById(id);
+    public ResponseEntity<Ticket> update(@PathVariable String id, @RequestBody Ticket request) {
+        Ticket existing = ticketService.getById(id);
         if (existing == null) {
             return ResponseEntity.notFound().build();
         }
@@ -68,7 +68,7 @@ public class ticketcontroller {
         return ResponseEntity.noContent().build();
     }
 
-    private static void mergeMissingFields(ticket target, ticket existing) {
+    private static void mergeMissingFields(Ticket target, Ticket existing) {
         if (target.getTitle() == null) {
             target.setTitle(existing.getTitle());
         }

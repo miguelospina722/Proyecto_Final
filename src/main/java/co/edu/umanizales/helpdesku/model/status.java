@@ -10,9 +10,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class status extends baseentity {
+public class Status extends BaseEntity {
 
-    private ticketstatus code;
+    private TicketStatus code;
     private String description;
 
     @Override
@@ -28,7 +28,7 @@ public class status extends baseentity {
 
     @Override
     public void fromCsv(String csvLine) {
-        String[] data = csvhelper.splitLine(csvLine);
+        String[] data = CsvHelper.splitLine(csvLine);
         applyBaseValues(data);
         if (data.length > 3) {
             code = parseCode(data[3]);
@@ -43,7 +43,7 @@ public class status extends baseentity {
         return mergeHeaders("code", "description");
     }
 
-    public void setCode(ticketstatus code) {
+    public void setCode(TicketStatus code) {
         if (code == null) {
             throw new BadRequestException("Asigna un estado correcto");
         }
@@ -51,13 +51,13 @@ public class status extends baseentity {
     }
 
     public void setCode(String rawCode) {
-        this.code = ticketstatus.fromString(rawCode);
+        this.code = TicketStatus.fromString(rawCode);
     }
 
-    private static ticketstatus parseCode(String rawValue) {
+    private static TicketStatus parseCode(String rawValue) {
         if (rawValue == null || rawValue.isBlank()) {
             return null;
         }
-        return ticketstatus.fromString(rawValue);
+        return TicketStatus.fromString(rawValue);
     }
 }

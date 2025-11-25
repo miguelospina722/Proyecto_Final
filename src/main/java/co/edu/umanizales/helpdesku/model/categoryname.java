@@ -4,11 +4,10 @@ import java.text.Normalizer;
 import java.util.Locale;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import co.edu.umanizales.helpdesku.exception.BadRequestException;
 
-public enum categoryname {
+public enum CategoryName {
 
     INFRASTRUCTURE,
     HARDWARE,
@@ -17,7 +16,7 @@ public enum categoryname {
     SERVICES;
 
     @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-    public static categoryname fromString(String value) {
+    public static CategoryName fromString(String value) {
         if (value == null) {
             throw new BadRequestException("Asigna una categoría correcta");
         }
@@ -26,14 +25,14 @@ public enum categoryname {
             throw new BadRequestException("Asigna una categoría correcta");
         }
 
-        for (categoryname option : values()) {
+        for (CategoryName option : values()) {
             if (option.name().equalsIgnoreCase(sanitized)) {
                 return option;
             }
         }
 
         String normalized = normalize(sanitized);
-        categoryname aliasMatch = fromAlias(normalized);
+        CategoryName aliasMatch = fromAlias(normalized);
         if (aliasMatch != null) {
             return aliasMatch;
         }
@@ -48,7 +47,7 @@ public enum categoryname {
                 .strip();
     }
 
-    private static categoryname fromAlias(String normalized) {
+    private static CategoryName fromAlias(String normalized) {
         return switch (normalized) {
             case "INFRAESTRUCTURA", "INFRASTRUCTURE" -> INFRASTRUCTURE;
             case "HARDWARE" -> HARDWARE;
@@ -59,8 +58,4 @@ public enum categoryname {
         };
     }
 
-    @JsonValue
-    public String toJson() {
-        return name();
-    }
 }

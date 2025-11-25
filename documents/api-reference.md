@@ -26,7 +26,7 @@ curl http://localhost:8095/api/health
 
 ### Reglas de validación
 - `username` es obligatorio, no puede contener solo espacios y debe ser único en el sistema. Intentar registrar un nombre ya existente responde con **400** y mensaje `"Este usuario ya está creado"`.
-- `role` debe ser uno de los valores definidos en `userrole` (`ADMIN`, `TECHNICIAN`, `AGENT`, `USER`). Alias comunes como `administrador`, `tecnico`, `practicante` se normalizan automáticamente. Cualquier valor inválido responde con **400** y mensaje `"Asigna un rol correcto"`.
+- `role` debe ser uno de los valores definidos en `UserRole` (`ADMIN`, `TECHNICIAN`, `AGENT`, `USER`). Alias comunes como `administrador`, `tecnico`, `practicante` se normalizan automáticamente. Cualquier valor inválido responde con **400** y mensaje `"Asigna un rol correcto"`.
 - `contact.email` es obligatorio y debe contener `@`. Valores inválidos producen **400** y mensaje `"Debe poner un correo válido."`.
 - `active` controla el acceso del usuario. Si es `false`, toda operación que requiera al usuario (por ejemplo, asignarlo a un ticket) responderá **400** con el mensaje `"Este usuario no está activo."`.
 

@@ -3,11 +3,10 @@ package co.edu.umanizales.helpdesku.model;
 import java.util.Locale;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import co.edu.umanizales.helpdesku.exception.BadRequestException;
 
-public enum userrole {
+public enum UserRole {
 
     ADMIN,
     TECHNICIAN,
@@ -15,7 +14,7 @@ public enum userrole {
     USER;
 
     @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-    public static userrole fromString(String value) {
+    public static UserRole fromString(String value) {
         if (value == null) {
             throw new BadRequestException("Asigna un rol correcto");
         }
@@ -24,7 +23,7 @@ public enum userrole {
             throw new BadRequestException("Asigna un rol correcto");
         }
 
-        for (userrole role : values()) {
+        for (UserRole role : values()) {
             if (role.name().equalsIgnoreCase(sanitized)) {
                 return role;
             }
@@ -45,7 +44,7 @@ public enum userrole {
             if (token.isBlank()) {
                 continue;
             }
-            userrole aliasMatch = fromAlias(token);
+            UserRole aliasMatch = fromAlias(token);
             if (aliasMatch != null) {
                 return aliasMatch;
             }
@@ -54,7 +53,7 @@ public enum userrole {
         throw new BadRequestException("Asigna un rol correcto");
     }
 
-    private static userrole fromAlias(String token) {
+    private static UserRole fromAlias(String token) {
         return switch (token.toUpperCase(Locale.ROOT)) {
             case "ADMIN","ADMINISTRADOR" -> ADMIN;
             case "TECHNICIAN", "TECH", "TECNICO", "TÉCNICO" -> TECHNICIAN;
@@ -64,8 +63,4 @@ public enum userrole {
         };
     }
 
-    @JsonValue
-    public String toJson() {
-        return name();
-    }
 }

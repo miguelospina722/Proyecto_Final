@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class baseentity implements csvpersistable {
+public abstract class BaseEntity implements CsvPersistable {
 
     private String id;
     private LocalDateTime createdAt;
@@ -60,11 +60,28 @@ public abstract class baseentity implements csvpersistable {
         return result;
     }
 
-    protected static String idOrEmpty(baseentity entity) {
+    protected void appendEntityId(StringBuilder builder, BaseEntity entity) {
+        builder.append(',');
+        builder.append(idOrEmpty(entity));
+    }
+
+    protected void appendString(StringBuilder builder, String value) {
+        builder.append(',');
+        builder.append(value == null ? "" : value);
+    }
+
+    protected void appendNullable(StringBuilder builder, Object value) {
+        builder.append(',');
+        if (value != null) {
+            builder.append(value);
+        }
+    }
+
+    protected static String idOrEmpty(BaseEntity entity) {
         return entity == null || entity.getId() == null ? "" : entity.getId();
     }
 
-    protected static <T extends baseentity> T referenceFromId(String rawValue, Supplier<T> factory) {
+    protected static <T extends BaseEntity> T referenceFromId(String rawValue, Supplier<T> factory) {
         if (rawValue == null || rawValue.isBlank()) {
             return null;
         }
@@ -77,7 +94,25 @@ public abstract class baseentity implements csvpersistable {
         return data.length > index ? data[index] : null;
     }
 
-    public void onRemove() {
-        // Default implementation does nothing. Subclasses may override to release resources.
+    protected <T extends BaseEntity> T parseReference(String[] data, int index, Supplier<T> factory) {
+        return referenceFromId(valueAt(data, index), factory);
+    }
+
+    protected LocalDateTime parseDateTime(String value) {
+        if (value == null || value.isBlank()) {
+            return null;
+        }
+        return LocalDateTime.parse(value);
+    }
+
+    protected Long parseLong(String value) {
+        if (value == null || value.isBlank()) {
+            return null;
+        }
+        return Long.parseLong(value);
+    }
+
+    protected boolean parseBoolean(String value) {
+        return value != null && !value.isBlank() && Boolean.parseBoolean(value);
     }
 }

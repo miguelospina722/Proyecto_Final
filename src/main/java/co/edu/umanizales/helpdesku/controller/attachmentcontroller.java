@@ -13,27 +13,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.umanizales.helpdesku.model.attachment;
-import co.edu.umanizales.helpdesku.service.attachmentservice;
+import co.edu.umanizales.helpdesku.model.Attachment;
+import co.edu.umanizales.helpdesku.service.AttachmentService;
 
 @RestController
 @RequestMapping("/api/attachments")
-public class attachmentcontroller {
+public class AttachmentController {
 
-    private final attachmentservice attachmentService;
+    private final AttachmentService attachmentService;
 
-    public attachmentcontroller(attachmentservice attachmentService) {
+    public AttachmentController(AttachmentService attachmentService) {
         this.attachmentService = attachmentService;
     }
 
     @GetMapping
-    public ResponseEntity<List<attachment>> getAll() {
+    public ResponseEntity<List<Attachment>> getAll() {
         return ResponseEntity.ok(attachmentService.list());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<attachment> getById(@PathVariable String id) {
-        attachment found = attachmentService.getById(id);
+    public ResponseEntity<Attachment> getById(@PathVariable String id) {
+        Attachment found = attachmentService.getById(id);
         if (found == null) {
             return ResponseEntity.notFound().build();
         }
@@ -41,15 +41,15 @@ public class attachmentcontroller {
     }
 
     @PostMapping
-    public ResponseEntity<attachment> create(@RequestBody attachment request) {
+    public ResponseEntity<Attachment> create(@RequestBody Attachment request) {
         request.setId(null);
-        attachment saved = attachmentService.saveAttachment(request);
+        Attachment saved = attachmentService.saveAttachment(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<attachment> update(@PathVariable String id, @RequestBody attachment request) {
-        attachment existing = attachmentService.getById(id);
+    public ResponseEntity<Attachment> update(@PathVariable String id, @RequestBody Attachment request) {
+        Attachment existing = attachmentService.getById(id);
         if (existing == null) {
             return ResponseEntity.notFound().build();
         }

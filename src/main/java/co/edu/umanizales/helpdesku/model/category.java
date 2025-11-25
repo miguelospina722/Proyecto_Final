@@ -10,25 +10,22 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class category extends baseentity {
+public class Category extends BaseEntity {
 
-    private categoryname name;
+    private CategoryName name;
     private String description;
 
     @Override
     public String toCsv() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(buildBaseCsv());
-        builder.append(",");
-        builder.append(name == null ? "" : name.name());
-        builder.append(",");
-        builder.append(description == null ? "" : description);
+        StringBuilder builder = new StringBuilder(buildBaseCsv());
+        appendString(builder, name == null ? null : name.name());
+        appendString(builder, description);
         return builder.toString();
     }
 
     @Override
     public void fromCsv(String csvLine) {
-        String[] data = csvhelper.splitLine(csvLine);
+        String[] data = CsvHelper.splitLine(csvLine);
         applyBaseValues(data);
         if (data.length > 3) {
             name = parseName(data[3]);
@@ -43,7 +40,7 @@ public class category extends baseentity {
         return mergeHeaders("name", "description");
     }
 
-    public void setName(categoryname name) {
+    public void setName(CategoryName name) {
         if (name == null) {
             throw new BadRequestException("Asigna una categoría correcta");
         }
@@ -51,13 +48,13 @@ public class category extends baseentity {
     }
 
     public void setName(String rawName) {
-        this.name = categoryname.fromString(rawName);
+        this.name = CategoryName.fromString(rawName);
     }
 
-    private static categoryname parseName(String rawValue) {
+    private static CategoryName parseName(String rawValue) {
         if (rawValue == null || rawValue.isBlank()) {
             return null;
         }
-        return categoryname.fromString(rawValue);
+        return CategoryName.fromString(rawValue);
     }
 }

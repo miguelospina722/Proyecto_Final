@@ -5,27 +5,27 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import co.edu.umanizales.helpdesku.exception.BadRequestException;
-import co.edu.umanizales.helpdesku.model.attachment;
-import co.edu.umanizales.helpdesku.model.ticket;
+import co.edu.umanizales.helpdesku.model.Attachment;
+import co.edu.umanizales.helpdesku.model.Ticket;
 
 @Service
-public class attachmentservice extends csvbaseservice<attachment> {
+public class AttachmentService extends CsvBaseService<Attachment> {
 
-    private final ticketservice ticketService;
+    private final TicketService ticketService;
 
-    public attachmentservice(ticketservice ticketService) {
+    public AttachmentService(TicketService ticketService) {
         super("attachments.csv");
         this.ticketService = ticketService;
     }
 
     @Override
-    protected attachment createEmpty() {
-        return new attachment();
+    protected Attachment createEmpty() {
+        return new Attachment();
     }
 
     @Override
     protected String[] headerRow() {
-        attachment sample = new attachment();
+        Attachment sample = new Attachment();
         String[] headers = sample.headers();
         String[] copy = new String[headers.length];
         for (int index = 0; index < headers.length; index++) {
@@ -34,19 +34,19 @@ public class attachmentservice extends csvbaseservice<attachment> {
         return copy;
     }
 
-    public List<attachment> list() {
-        List<attachment> attachments = findAll();
+    public List<Attachment> list() {
+        List<Attachment> attachments = findAll();
         for (int index = 0; index < attachments.size(); index++) {
             hydrate(attachments.get(index));
         }
         return attachments;
     }
 
-    public attachment getById(String id) {
+    public Attachment getById(String id) {
         return hydrate(findById(id));
     }
 
-    public attachment saveAttachment(attachment entity) {
+    public Attachment saveAttachment(Attachment entity) {
         ensureTicketExists(entity);
         return save(entity);
     }
@@ -55,25 +55,25 @@ public class attachmentservice extends csvbaseservice<attachment> {
         return delete(id);
     }
 
-    private void ensureTicketExists(attachment entity) {
-        ticket reference = entity.getTicket();
+    private void ensureTicketExists(Attachment entity) {
+        Ticket reference = entity.getTicket();
         if (reference == null || reference.getId() == null || reference.getId().isBlank()) {
             throw new BadRequestException("Ticket no encontrado");
         }
-        ticket stored = ticketService.getDetailedCopyById(reference.getId());
+        Ticket stored = ticketService.getDetailedCopyById(reference.getId());
         if (stored == null) {
             throw new BadRequestException("Ticket no encontrado");
         }
         entity.setTicket(stored);
     }
 
-    private attachment hydrate(attachment entity) {
+    private Attachment hydrate(Attachment entity) {
         if (entity == null) {
             return null;
         }
-        ticket ticket = entity.getTicket();
+        Ticket ticket = entity.getTicket();
         if (ticket != null && ticket.getId() != null && !ticket.getId().isBlank()) {
-            ticket storedTicket = ticketService.getDetailedCopyById(ticket.getId());
+            Ticket storedTicket = ticketService.getDetailedCopyById(ticket.getId());
             if (storedTicket != null) {
                 entity.setTicket(storedTicket);
             }

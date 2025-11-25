@@ -13,27 +13,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.umanizales.helpdesku.model.status;
-import co.edu.umanizales.helpdesku.service.statusservice;
+import co.edu.umanizales.helpdesku.model.Status;
+import co.edu.umanizales.helpdesku.service.StatusService;
 
 @RestController
 @RequestMapping({"/api/status"})
-public class statuscontroller {
+public class StatusController {
 
-    private final statusservice statusService;
+    private final StatusService statusService;
 
-    public statuscontroller(statusservice statusService) {
+    public StatusController(StatusService statusService) {
         this.statusService = statusService;
     }
 
     @GetMapping
-    public ResponseEntity<List<status>> getAll() {
+    public ResponseEntity<List<Status>> getAll() {
         return ResponseEntity.ok(statusService.list());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<status> getById(@PathVariable String id) {
-        status found = statusService.getById(id);
+    public ResponseEntity<Status> getById(@PathVariable String id) {
+        Status found = statusService.getById(id);
         if (found == null) {
             return ResponseEntity.notFound().build();
         }
@@ -41,15 +41,15 @@ public class statuscontroller {
     }
 
     @PostMapping
-    public ResponseEntity<status> create(@RequestBody status request) {
+    public ResponseEntity<Status> create(@RequestBody Status request) {
         request.setId(null);
-        status saved = statusService.saveStatus(request);
+        Status saved = statusService.saveStatus(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<status> update(@PathVariable String id, @RequestBody status request) {
-        status existing = statusService.getById(id);
+    public ResponseEntity<Status> update(@PathVariable String id, @RequestBody Status request) {
+        Status existing = statusService.getById(id);
         if (existing == null) {
             return ResponseEntity.notFound().build();
         }

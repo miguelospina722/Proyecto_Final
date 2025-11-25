@@ -5,24 +5,24 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import co.edu.umanizales.helpdesku.exception.BadRequestException;
-import co.edu.umanizales.helpdesku.model.category;
-import co.edu.umanizales.helpdesku.model.priority;
-import co.edu.umanizales.helpdesku.model.status;
-import co.edu.umanizales.helpdesku.model.ticket;
-import co.edu.umanizales.helpdesku.model.user;
+import co.edu.umanizales.helpdesku.model.Category;
+import co.edu.umanizales.helpdesku.model.Priority;
+import co.edu.umanizales.helpdesku.model.Status;
+import co.edu.umanizales.helpdesku.model.Ticket;
+import co.edu.umanizales.helpdesku.model.User;
 
 @Service
-public class ticketservice extends csvbaseservice<ticket> {
+public class TicketService extends CsvBaseService<Ticket> {
 
-    private final userservice userService;
-    private final statusservice statusService;
-    private final categoryservice categoryService;
-    private final priorityservice priorityService;
+    private final UserService userService;
+    private final StatusService statusService;
+    private final CategoryService categoryService;
+    private final PriorityService priorityService;
 
-    public ticketservice(userservice userService,
-                         statusservice statusService,
-                         categoryservice categoryService,
-                         priorityservice priorityService) {
+    public TicketService(UserService userService,
+                         StatusService statusService,
+                         CategoryService categoryService,
+                         PriorityService priorityService) {
         super("tickets.csv");
         this.userService = userService;
         this.statusService = statusService;
@@ -31,13 +31,13 @@ public class ticketservice extends csvbaseservice<ticket> {
     }
 
     @Override
-    protected ticket createEmpty() {
-        return new ticket();
+    protected Ticket createEmpty() {
+        return new Ticket();
     }
 
     @Override
     protected String[] headerRow() {
-        ticket sample = new ticket();
+        Ticket sample = new Ticket();
         String[] headers = sample.headers();
         String[] copy = new String[headers.length];
         for (int index = 0; index < headers.length; index++) {
@@ -46,28 +46,28 @@ public class ticketservice extends csvbaseservice<ticket> {
         return copy;
     }
 
-    public List<ticket> list() {
-        List<ticket> tickets = findAll();
+    public List<Ticket> list() {
+        List<Ticket> tickets = findAll();
         for (int index = 0; index < tickets.size(); index++) {
             hydrate(tickets.get(index));
         }
         return tickets;
     }
 
-    public ticket getById(String id) {
+    public Ticket getById(String id) {
         return hydrate(findById(id));
     }
 
-    public ticket getDetailedCopyById(String id) {
-        ticket stored = findById(id);
+    public Ticket getDetailedCopyById(String id) {
+        Ticket stored = findById(id);
         if (stored == null) {
             return null;
         }
-        ticket clone = copyOf(stored);
+        Ticket clone = copyOf(stored);
         return hydrate(clone);
     }
 
-    public ticket saveTicket(ticket entity) {
+    public Ticket saveTicket(Ticket entity) {
         ensureStatusExists(entity);
         ensureCategoryExists(entity);
         ensurePriorityExists(entity);
@@ -80,56 +80,56 @@ public class ticketservice extends csvbaseservice<ticket> {
         return delete(id);
     }
 
-    private void ensureActiveUser(user reference, java.util.function.Consumer<user> setter) {
+    private void ensureActiveUser(User reference, java.util.function.Consumer<User> setter) {
         if (reference == null || reference.getId() == null || reference.getId().isBlank()) {
             setter.accept(null);
             return;
         }
         try {
-            user active = userService.requireActiveUserById(reference.getId());
+            User active = userService.requireActiveUserById(reference.getId());
             setter.accept(active);
         } catch (BadRequestException exception) {
             throw new BadRequestException("Id usuario no existente, no activo o no valido");
         }
     }
 
-    private void ensureStatusExists(ticket entity) {
-        status reference = entity.getStatus();
+    private void ensureStatusExists(Ticket entity) {
+        Status reference = entity.getStatus();
         if (reference == null || reference.getId() == null || reference.getId().isBlank()) {
             throw new BadRequestException("Id no valido de los estados existentes");
         }
-        status stored = statusService.getById(reference.getId());
+        Status stored = statusService.getById(reference.getId());
         if (stored == null) {
             throw new BadRequestException("Id no valido de los estados existentes");
         }
         entity.setStatus(stored);
     }
 
-    private void ensureCategoryExists(ticket entity) {
-        category reference = entity.getCategory();
+    private void ensureCategoryExists(Ticket entity) {
+        Category reference = entity.getCategory();
         if (reference == null || reference.getId() == null || reference.getId().isBlank()) {
             throw new BadRequestException("Id no valido de las categorias existentes");
         }
-        category stored = categoryService.getById(reference.getId());
+        Category stored = categoryService.getById(reference.getId());
         if (stored == null) {
             throw new BadRequestException("Id no valido de las categorias existentes");
         }
         entity.setCategory(stored);
     }
 
-    private void ensurePriorityExists(ticket entity) {
-        priority reference = entity.getPriority();
+    private void ensurePriorityExists(Ticket entity) {
+        Priority reference = entity.getPriority();
         if (reference == null || reference.getId() == null || reference.getId().isBlank()) {
             throw new BadRequestException("Id no valido de las prioridades existentes");
         }
-        priority stored = priorityService.getById(reference.getId());
+        Priority stored = priorityService.getById(reference.getId());
         if (stored == null) {
             throw new BadRequestException("Id no valido de las prioridades existentes");
         }
         entity.setPriority(stored);
     }
 
-    private ticket hydrate(ticket entity) {
+    private Ticket hydrate(Ticket entity) {
         if (entity == null) {
             return null;
         }
@@ -141,8 +141,8 @@ public class ticketservice extends csvbaseservice<ticket> {
         return entity;
     }
 
-    private ticket copyOf(ticket source) {
-        ticket clone = new ticket();
+    private Ticket copyOf(Ticket source) {
+        Ticket clone = new Ticket();
         clone.setId(source.getId());
         clone.setCreatedAt(source.getCreatedAt());
         clone.setUpdatedAt(source.getUpdatedAt());

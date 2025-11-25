@@ -6,25 +6,35 @@
   <component name="ChangeListManager">
     <list default="true" id="af3c146f-6328-4a85-a300-9222eff23aaf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/assignments.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/assignments.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/attachments.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/attachments.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/categories.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/categories.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/comments.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/comments.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/notifications.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/notifications.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/sla.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/sla.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/statuses.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/statuses.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/tickets.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/tickets.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/users.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/documents/api-reference.md" beforeDir="false" afterPath="$PROJECT_DIR$/documents/api-reference.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/documents/postman/RESTful API Basics #blueprint.postman_collection.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/assignmentcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/assignmentcontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/attachmentcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/attachmentcontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/categorycontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/categorycontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/commentcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/commentcontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/healthcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/healthcontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/notificationcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/notificationcontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/prioritycontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/prioritycontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/slacontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/slacontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/statuscontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/statuscontroller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/ticketcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/ticketcontroller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/usercontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/controller/usercontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/exception/BadRequestException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/exception/BadRequestException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/helpdesk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/helpdesk.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/assignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/assignment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/attachment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/attachment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/baseentity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/baseentity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/categoryname.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/categoryname.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/csvhelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/csvhelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/csvpersistable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/csvpersistable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/notification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/notification.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/priority.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/priority.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/prioritylevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/prioritylevel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/sla.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/sla.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/status.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/status.java" afterDir="false" />
@@ -32,23 +42,44 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/ticketstatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/ticketstatus.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/user.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/user.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/usercontact.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/usercontact.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/userrole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/model/userrole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/EndpointCatalogChangedEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/EndpointCatalogChangedEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/assignmentservice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/assignmentservice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/attachmentservice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/attachmentservice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/categoryservice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/categoryservice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/commentservice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/commentservice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/csvbaseservice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/csvbaseservice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/endpointcatalogwriter.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/notificationservice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/notificationservice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/priorityservice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/priorityservice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/slaservice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/slaservice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/statusservice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/statusservice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/ticketservice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/ticketservice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/userservice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/umanizales/helpdesku/service/userservice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/assignmentcontroller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/assignmentcontroller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/attachmentcontroller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/attachmentcontroller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/categorycontroller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/categorycontroller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/commentcontroller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/commentcontroller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/healthcontroller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/healthcontroller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/notificationcontroller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/notificationcontroller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/prioritycontroller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/prioritycontroller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/slacontroller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/slacontroller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/statuscontroller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/statuscontroller.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/ticketcontroller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/ticketcontroller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/usercontroller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/controller/usercontroller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/helpdesk.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/helpdesk.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/assignment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/assignment.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/attachment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/attachment.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/baseentity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/baseentity.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/category.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/category.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/categoryname.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/categoryname.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/comment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/comment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/csvhelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/csvhelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/csvpersistable.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/csvpersistable.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/notification.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/notification.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/priority.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/priority.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/prioritylevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/prioritylevel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/sla.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/sla.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/status.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/status.class" afterDir="false" />
@@ -56,12 +87,17 @@
       <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/ticketstatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/ticketstatus.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/user.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/user.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/usercontact.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/usercontact.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/userrole.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/model/userrole.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/assignmentservice.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/assignmentservice.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/attachmentservice.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/attachmentservice.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/categoryservice.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/categoryservice.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/commentservice.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/commentservice.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/csvbaseservice.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/csvbaseservice.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/endpointcatalogwriter.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/notificationservice.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/notificationservice.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/priorityservice.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/priorityservice.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/slaservice.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/slaservice.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/statusservice.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/statusservice.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/ticketservice.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/ticketservice.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/userservice.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/umanizales/helpdesku/service/userservice.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/help_desk_u-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/help_desk_u-1.0-SNAPSHOT.jar" afterDir="false" />
@@ -84,6 +120,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -92,29 +131,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.helpdesk.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHELLCHECK.PATH&quot;: &quot;C:\\Users\\INDUMA\\AppData\\Roaming\\JetBrains\\IntelliJIdea2025.2\\plugins\\Shell Script\\shellcheck.exe&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/INDUMA/Documents/Proyecto_Final_Programacion1/Copias/HelpDesk_U&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/INDUMA/Documents/Proyecto_Final_Programacion1/HelpDesk_U/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Helpdesk.executor": "Run",
+    "Application.helpdesk.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHELLCHECK.PATH": "C:\\Users\\INDUMA\\AppData\\Roaming\\JetBrains\\IntelliJIdea2025.2\\plugins\\Shell Script\\shellcheck.exe",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/INDUMA/Documents/Proyecto_Final_Programacion1/HelpDesk_U",
+    "onboarding.tips.debug.path": "C:/Users/INDUMA/Documents/Proyecto_Final_Programacion1/HelpDesk_U/src/Main.java",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\INDUMA\Documents\Proyecto_Final_Programacion1\HelpDesk_U\documents" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Helpdesk">
+    <configuration name="Helpdesk" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="co.edu.umanizales.helpdesku.Helpdesk" />
+      <module name="help_desk_u" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="co.edu.umanizales.helpdesku.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="helpdesk" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="co.edu.umanizales.helpdesku.helpdesk" />
       <module name="help_desk_u" />
@@ -130,6 +183,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Helpdesk" />
         <item itemvalue="Application.helpdesk" />
       </list>
     </recent_temporary>

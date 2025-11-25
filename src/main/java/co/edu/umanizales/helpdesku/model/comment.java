@@ -13,13 +13,13 @@ import co.edu.umanizales.helpdesku.exception.BadRequestException;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class comment extends baseentity {
+public class Comment extends BaseEntity {
 
     private static final String TICKET_ERROR_MESSAGE = "Ticket no encontrado";
     private static final String USER_ERROR_MESSAGE = "Id usuario no existente, no activo o no valido";
 
-    private ticket ticket;
-    private user author;
+    private Ticket ticket;
+    private User author;
     private String content;
     private LocalDateTime commentedAt;
 
@@ -27,18 +27,11 @@ public class comment extends baseentity {
     public String toCsv() {
         validateTicket();
         validateAuthor();
-        StringBuilder builder = new StringBuilder();
-        builder.append(buildBaseCsv());
-        builder.append(",");
-        builder.append(idOrEmpty(ticket));
-        builder.append(",");
-        builder.append(idOrEmpty(author));
-        builder.append(",");
-        builder.append(content == null ? "" : content);
-        builder.append(",");
-        if (commentedAt != null) {
-            builder.append(commentedAt);
-        }
+        StringBuilder builder = new StringBuilder(buildBaseCsv());
+        appendEntityId(builder, ticket);
+        appendEntityId(builder, author);
+        appendString(builder, content);
+        appendNullable(builder, commentedAt);
         return builder.toString();
     }
 
@@ -56,20 +49,12 @@ public class comment extends baseentity {
 
     @Override
     public void fromCsv(String csvLine) {
-        String[] data = csvhelper.splitLine(csvLine);
+        String[] data = CsvHelper.splitLine(csvLine);
         applyBaseValues(data);
-        if (data.length > 3) {
-            ticket = referenceFromId(data[3], ticket::new);
-        }
-        if (data.length > 4) {
-            author = referenceFromId(data[4], user::new);
-        }
-        if (data.length > 5) {
-            content = data[5];
-        }
-        if (data.length > 6 && data[6] != null && !data[6].isEmpty()) {
-            commentedAt = LocalDateTime.parse(data[6]);
-        }
+        ticket = parseReference(data, 3, Ticket::new);
+        author = parseReference(data, 4, User::new);
+        content = valueAt(data, 5);
+        commentedAt = parseDateTime(valueAt(data, 6));
     }
 
     @Override

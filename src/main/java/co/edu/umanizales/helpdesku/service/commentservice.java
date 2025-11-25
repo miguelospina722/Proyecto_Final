@@ -5,30 +5,30 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import co.edu.umanizales.helpdesku.exception.BadRequestException;
-import co.edu.umanizales.helpdesku.model.comment;
-import co.edu.umanizales.helpdesku.model.ticket;
-import co.edu.umanizales.helpdesku.model.user;
+import co.edu.umanizales.helpdesku.model.Comment;
+import co.edu.umanizales.helpdesku.model.Ticket;
+import co.edu.umanizales.helpdesku.model.User;
 
 @Service
-public class commentservice extends csvbaseservice<comment> {
+public class CommentService extends CsvBaseService<Comment> {
 
-    private final userservice userService;
-    private final ticketservice ticketService;
+    private final UserService userService;
+    private final TicketService ticketService;
 
-    public commentservice(userservice userService, ticketservice ticketService) {
+    public CommentService(UserService userService, TicketService ticketService) {
         super("comments.csv");
         this.userService = userService;
         this.ticketService = ticketService;
     }
 
     @Override
-    protected comment createEmpty() {
-        return new comment();
+    protected Comment createEmpty() {
+        return new Comment();
     }
 
     @Override
     protected String[] headerRow() {
-        comment sample = new comment();
+        Comment sample = new Comment();
         String[] headers = sample.headers();
         String[] copy = new String[headers.length];
         for (int index = 0; index < headers.length; index++) {
@@ -37,19 +37,19 @@ public class commentservice extends csvbaseservice<comment> {
         return copy;
     }
 
-    public List<comment> list() {
-        List<comment> comments = findAll();
+    public List<Comment> list() {
+        List<Comment> comments = findAll();
         for (int index = 0; index < comments.size(); index++) {
             hydrate(comments.get(index));
         }
         return comments;
     }
 
-    public comment getById(String id) {
+    public Comment getById(String id) {
         return hydrate(findById(id));
     }
 
-    public comment saveComment(comment entity) {
+    public Comment saveComment(Comment entity) {
         ensureTicketExists(entity);
         ensureActiveAuthor(entity);
         return save(entity);
@@ -59,8 +59,8 @@ public class commentservice extends csvbaseservice<comment> {
         return delete(id);
     }
 
-    private void ensureActiveAuthor(comment entity) {
-        user author = entity.getAuthor();
+    private void ensureActiveAuthor(Comment entity) {
+        User author = entity.getAuthor();
         if (author == null || author.getId() == null || author.getId().isBlank()) {
             throw new BadRequestException("Id usuario no existente, no activo o no valido");
         }
@@ -71,32 +71,32 @@ public class commentservice extends csvbaseservice<comment> {
         }
     }
 
-    private void ensureTicketExists(comment entity) {
-        ticket reference = entity.getTicket();
+    private void ensureTicketExists(Comment entity) {
+        Ticket reference = entity.getTicket();
         if (reference == null || reference.getId() == null || reference.getId().isBlank()) {
             throw new BadRequestException("Ticket no encontrado");
         }
-        ticket stored = ticketService.getById(reference.getId());
+        Ticket stored = ticketService.getById(reference.getId());
         if (stored == null) {
             throw new BadRequestException("Ticket no encontrado");
         }
         entity.setTicket(stored);
     }
 
-    private comment hydrate(comment entity) {
+    private Comment hydrate(Comment entity) {
         if (entity == null) {
             return null;
         }
-        ticket ticket = entity.getTicket();
+        Ticket ticket = entity.getTicket();
         if (ticket != null && ticket.getId() != null && !ticket.getId().isBlank()) {
-            ticket storedTicket = ticketService.getById(ticket.getId());
+            Ticket storedTicket = ticketService.getById(ticket.getId());
             if (storedTicket != null) {
                 entity.setTicket(storedTicket);
             }
         }
-        user author = entity.getAuthor();
+        User author = entity.getAuthor();
         if (author != null && author.getId() != null && !author.getId().isBlank()) {
-            user storedUser = userService.getById(author.getId());
+            User storedUser = userService.getById(author.getId());
             if (storedUser != null) {
                 entity.setAuthor(storedUser);
             }

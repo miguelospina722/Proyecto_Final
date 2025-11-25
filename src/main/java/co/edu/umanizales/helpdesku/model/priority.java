@@ -9,10 +9,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class priority extends baseentity {
+public class Priority extends BaseEntity {
 
     private String name;
-    private prioritylevel level;
+    private PriorityLevel level;
     private int responseMinutes;
     private int resolveMinutes;
 
@@ -33,13 +33,13 @@ public class priority extends baseentity {
 
     @Override
     public void fromCsv(String csvLine) {
-        String[] data = csvhelper.splitLine(csvLine);
+        String[] data = CsvHelper.splitLine(csvLine);
         applyBaseValues(data);
         if (data.length > 3) {
             name = data[3];
         }
         if (data.length > 4 && data[4] != null && !data[4].isEmpty()) {
-            level = prioritylevel.valueOf(data[4]);
+            level = PriorityLevel.valueOf(data[4]);
         }
         if (data.length > 5 && data[5] != null && !data[5].isEmpty()) {
             responseMinutes = Integer.parseInt(data[5]);

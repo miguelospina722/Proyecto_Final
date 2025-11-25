@@ -13,11 +13,11 @@ import co.edu.umanizales.helpdesku.exception.BadRequestException;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class sla extends baseentity {
+public class Sla extends BaseEntity {
 
     private static final String TICKET_ERROR_MESSAGE = "Ticket no encontrado";
 
-    private ticket ticket;
+    private Ticket ticket;
     private LocalDateTime responseDeadline;
     private LocalDateTime resolutionDeadline;
     private boolean breached;
@@ -50,10 +50,10 @@ public class sla extends baseentity {
 
     @Override
     public void fromCsv(String csvLine) {
-        String[] data = csvhelper.splitLine(csvLine);
+        String[] data = CsvHelper.splitLine(csvLine);
         applyBaseValues(data);
         if (data.length > 3) {
-            ticket = referenceFromId(data[3], ticket::new);
+            ticket = referenceFromId(data[3], Ticket::new);
         }
         if (data.length > 4 && data[4] != null && !data[4].isEmpty()) {
             responseDeadline = LocalDateTime.parse(data[4]);

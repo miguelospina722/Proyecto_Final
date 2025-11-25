@@ -11,46 +11,31 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class assignment extends baseentity {
+public class Assignment extends BaseEntity {
 
-    private ticket ticket;
-    private user technician;
+    private Ticket ticket;
+    private User technician;
     private LocalDateTime assignedAt;
     private String notes;
 
     @Override
     public String toCsv() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(buildBaseCsv());
-        builder.append(",");
-        builder.append(idOrEmpty(ticket));
-        builder.append(",");
-        builder.append(idOrEmpty(technician));
-        builder.append(",");
-        if (assignedAt != null) {
-            builder.append(assignedAt);
-        }
-        builder.append(",");
-        builder.append(notes == null ? "" : notes);
+        StringBuilder builder = new StringBuilder(buildBaseCsv());
+        appendEntityId(builder, ticket);
+        appendEntityId(builder, technician);
+        appendNullable(builder, assignedAt);
+        appendString(builder, notes);
         return builder.toString();
     }
 
     @Override
     public void fromCsv(String csvLine) {
-        String[] data = csvhelper.splitLine(csvLine);
+        String[] data = CsvHelper.splitLine(csvLine);
         applyBaseValues(data);
-        if (data.length > 3) {
-            ticket = referenceFromId(data[3], ticket::new);
-        }
-        if (data.length > 4) {
-            technician = referenceFromId(data[4], user::new);
-        }
-        if (data.length > 5 && data[5] != null && !data[5].isEmpty()) {
-            assignedAt = LocalDateTime.parse(data[5]);
-        }
-        if (data.length > 6) {
-            notes = data[6];
-        }
+        ticket = parseReference(data, 3, Ticket::new);
+        technician = parseReference(data, 4, User::new);
+        assignedAt = parseDateTime(valueAt(data, 5));
+        notes = valueAt(data, 6);
     }
 
     @Override

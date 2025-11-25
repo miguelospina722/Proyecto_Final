@@ -14,17 +14,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import co.edu.umanizales.helpdesku.model.baseentity;
+import co.edu.umanizales.helpdesku.model.BaseEntity;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 
-public abstract class csvbaseservice<T extends baseentity> implements ApplicationEventPublisherAware {
+public abstract class CsvBaseService<T extends BaseEntity> implements ApplicationEventPublisherAware {
 
     private final List<T> items;
     private final Path filePath;
     private ApplicationEventPublisher applicationEventPublisher;
 
-    protected csvbaseservice(String fileName) {
+    protected CsvBaseService(String fileName) {
         items = new ArrayList<>();
         filePath = Paths.get("data", fileName);
         ensureFileExists();

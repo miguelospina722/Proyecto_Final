@@ -4,23 +4,23 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import co.edu.umanizales.helpdesku.model.category;
+import co.edu.umanizales.helpdesku.model.Category;
 
 @Service
-public class categoryservice extends csvbaseservice<category> {
+public class CategoryService extends CsvBaseService<Category> {
 
-    public categoryservice() {
+    public CategoryService() {
         super("categories.csv");
     }
 
     @Override
-    protected category createEmpty() {
-        return new category();
+    protected Category createEmpty() {
+        return new Category();
     }
 
     @Override
     protected String[] headerRow() {
-        category sample = new category();
+        Category sample = new Category();
         String[] headers = sample.headers();
         String[] copy = new String[headers.length];
         for (int index = 0; index < headers.length; index++) {
@@ -29,15 +29,15 @@ public class categoryservice extends csvbaseservice<category> {
         return copy;
     }
 
-    public List<category> list() {
+    public List<Category> list() {
         return findAll();
     }
 
-    public category getById(String id) {
+    public Category getById(String id) {
         return findById(id);
     }
 
-    public category saveCategory(category entity) {
+    public Category saveCategory(Category entity) {
         return save(entity);
     }
 

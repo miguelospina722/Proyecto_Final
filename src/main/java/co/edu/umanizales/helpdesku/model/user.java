@@ -12,13 +12,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class user extends baseentity {
+public class User extends BaseEntity {
 
     private String username;
     private String fullName;
-    private userrole role;
+    private UserRole role;
     private boolean active;
-    private usercontact contact;
+    private UserContact contact;
 
     @Override
     public String toCsv() {
@@ -36,7 +36,7 @@ public class user extends baseentity {
 
     @Override
     public void fromCsv(String csvLine) {
-        String[] data = csvhelper.splitLine(csvLine);
+        String[] data = CsvHelper.splitLine(csvLine);
         applyBaseValues(data);
         if (data.length > 3 && data[3] != null && !data[3].isEmpty()) {
             setUsername(data[3]);
@@ -45,13 +45,13 @@ public class user extends baseentity {
             fullName = data[4];
         }
         if (data.length > 5 && data[5] != null && !data[5].isBlank()) {
-            role = userrole.fromString(data[5]);
+            role = UserRole.fromString(data[5]);
         }
         if (data.length > 6) {
             active = Boolean.parseBoolean(data[6]);
         }
         if (data.length > 7) {
-            contact = usercontact.fromCompact(data[7]);
+            contact = UserContact.fromCompact(data[7]);
         }
     }
 

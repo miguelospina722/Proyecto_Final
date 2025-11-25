@@ -2,11 +2,11 @@ package co.edu.umanizales.helpdesku.model;
 
 import co.edu.umanizales.helpdesku.exception.BadRequestException;
 
-public record usercontact(String email, String phoneNumber) {
+public record UserContact(String email, String phoneNumber) {
 
-    public usercontact {
+    public UserContact {
         String sanitizedEmail = email == null ? null : email.trim();
-        if (sanitizedEmail == null || sanitizedEmail.isEmpty() || !sanitizedEmail.contains("@")) {
+        if (sanitizedEmail == null || !sanitizedEmail.contains("@")) {
             throw new BadRequestException("Debe poner un correo válido.");
         }
         String sanitizedPhone = phoneNumber == null ? null : phoneNumber.trim();
@@ -24,7 +24,7 @@ public record usercontact(String email, String phoneNumber) {
         return builder.toString();
     }
 
-    public static usercontact fromCompact(String compact) {
+    public static UserContact fromCompact(String compact) {
         if (compact == null || compact.isBlank()) {
             return null;
         }
@@ -34,6 +34,6 @@ public record usercontact(String email, String phoneNumber) {
         if (parsedEmail == null || parsedEmail.isEmpty()) {
             return null;
         }
-        return new usercontact(parsedEmail, parsedPhone);
+        return new UserContact(parsedEmail, parsedPhone);
     }
 }

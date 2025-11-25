@@ -4,23 +4,23 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import co.edu.umanizales.helpdesku.model.status;
+import co.edu.umanizales.helpdesku.model.Status;
 
 @Service
-public class statusservice extends csvbaseservice<status> {
+public class StatusService extends CsvBaseService<Status> {
 
-    public statusservice() {
+    public StatusService() {
         super("statuses.csv");
     }
 
     @Override
-    protected status createEmpty() {
-        return new status();
+    protected Status createEmpty() {
+        return new Status();
     }
 
     @Override
     protected String[] headerRow() {
-        status sample = new status();
+        Status sample = new Status();
         String[] headers = sample.headers();
         String[] copy = new String[headers.length];
         for (int index = 0; index < headers.length; index++) {
@@ -29,15 +29,15 @@ public class statusservice extends csvbaseservice<status> {
         return copy;
     }
 
-    public List<status> list() {
+    public List<Status> list() {
         return findAll();
     }
 
-    public status getById(String id) {
+    public Status getById(String id) {
         return findById(id);
     }
 
-    public status saveStatus(status entity) {
+    public Status saveStatus(Status entity) {
         return save(entity);
     }
 

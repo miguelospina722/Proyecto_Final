@@ -4,11 +4,10 @@ import java.text.Normalizer;
 import java.util.Locale;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import co.edu.umanizales.helpdesku.exception.BadRequestException;
 
-public enum ticketstatus {
+public enum TicketStatus {
 
     OPEN,
     ASSIGNED,
@@ -18,7 +17,7 @@ public enum ticketstatus {
     CLOSED;
 
     @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-    public static ticketstatus fromString(String value) {
+    public static TicketStatus fromString(String value) {
         if (value == null) {
             throw new BadRequestException("Escribe un estado correcto");
         }
@@ -27,14 +26,14 @@ public enum ticketstatus {
             throw new BadRequestException("Escribe un estado correcto");
         }
 
-        for (ticketstatus status : values()) {
+        for (TicketStatus status : values()) {
             if (status.name().equalsIgnoreCase(sanitized)) {
                 return status;
             }
         }
 
         String normalized = normalize(sanitized);
-        ticketstatus aliasMatch = fromAlias(normalized);
+        TicketStatus aliasMatch = fromAlias(normalized);
         if (aliasMatch != null) {
             return aliasMatch;
         }
@@ -49,7 +48,7 @@ public enum ticketstatus {
                 .strip();
     }
 
-    private static ticketstatus fromAlias(String normalized) {
+    private static TicketStatus fromAlias(String normalized) {
         return switch (normalized) {
             case "OPEN", "ABIERTO" -> OPEN;
             case "ASSIGNED", "ASIGNADO" -> ASSIGNED;
@@ -61,8 +60,4 @@ public enum ticketstatus {
         };
     }
 
-    @JsonValue
-    public String toJson() {
-        return name();
-    }
 }
